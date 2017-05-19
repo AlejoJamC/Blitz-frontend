@@ -3,25 +3,25 @@
 
 <div class="session-content">
     <div class="card card-block form-layout">
-        <form role="form" action="index.html" id="validate">
+        <form role="form" action="/login" id="validate">
             <div class="text-xs-center m-b-3">
-                <img src="images/logo-icon.png" height="80" alt="" class="m-b-1"/>
+                <img src="{{level}}img/logo_circle.png" height="80" alt="" class="m-b-1"/>
                 <h5>
-                    Welcome back!
+                    Bienvenidos al proyecto Blitz.
                 </h5>
                 <p class="text-muted">
-                    Sign in with your app id to continue.
+                    Por favor inicie sesión para continuar.
                 </p>
             </div>
             <fieldset class="form-group">
                 <label for="username">
-                    Enter your username
+                    Email
                 </label>
-                <input type="text" class="form-control form-control-lg" id="username" placeholder="username" required/>
+                <input type="text" class="form-control form-control-lg" id="email" placeholder="email@myemail.com" required/>
             </fieldset>
             <fieldset class="form-group">
                 <label for="password">
-                    Enter your password
+                    Contraseña
                 </label>
                 <input type="password" class="form-control form-control-lg" id="password" placeholder="********"
                        required/>
@@ -29,52 +29,25 @@
             <label class="custom-control custom-checkbox m-b-1">
                 <input type="checkbox" class="custom-control-input">
                 <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">Stay logged in</span>
+                <span class="custom-control-description">Recordar mis datos</span>
             </label>
             <button class="btn btn-primary btn-block btn-lg" type="submit">
-                Login
+                Iniciar sesión
             </button>
-            <div class="divider">
-                  <span>
-                    OR
-                  </span>
-            </div>
-            <div class="text-xs-center">
-                <p>
-                    Login with your social account
-                </p>
-                <button href="javascript:;" class="btn btn-icon-icon btn-facebook btn-lg m-b-1 m-r-1">
-                    <i class="fa fa-facebook">
-                    </i>
-                </button>
-                <button href="javascript:;" class="btn btn-icon-icon btn-github btn-lg m-b-1 m-r-1">
-                    <i class="fa fa-github">
-                    </i>
-                </button>
-                <button href="javascript:;" class="btn btn-icon-icon btn-google btn-lg m-b-1 m-r-1">
-                    <i class="fa fa-google-plus">
-                    </i>
-                </button>
-                <button href="javascript:;" class="btn btn-icon-icon btn-linkedin btn-lg m-b-1 m-r-1">
-                    <i class="fa fa-linkedin">
-                    </i>
-                </button>
-            </div>
         </form>
     </div>
 </div>
 <footer class="text-xs-center p-y-1">
     <p>
-        <a href="extra-forgot.html">
-            Forgot password?
+        <a href="/forgot">
+            ¿Olvidaste tu contraseña?
         </a>
         &nbsp;&nbsp;·&nbsp;&nbsp;
-        <a href="extra-signup.html">
-            Create an account
+        <a href="/signup">
+            Regístrate.
         </a>
     </p>
 </footer>
 
 {{#contentFor 'pageScripts'}}
-    <!--<script src="{{level}}scripts/main.js"></script>-->
 {{/contentFor}}

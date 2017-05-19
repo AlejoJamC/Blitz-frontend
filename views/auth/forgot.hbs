@@ -3,25 +3,25 @@
 
 <div class="session-content">
     <div class="card card-block form-layout">
-        <form role="form" action="extra-signin.html" id="validate">
+        <form role="form" action="/forgot" id="validate">
             <div class="text-xs-left m-b-3">
-                <img src="images/logo-icon.png" height="80" alt="" class="m-b-1"/>
+                <img src="{{level}}img/logo_circle.png" height="80" alt="" class="m-b-1"/>
                 <h5>
-                    Reset password
+                    Recuperar contraseña
                 </h5>
                 <p class="text-muted">
-                    Enter your email and we'll send you instructions on how to reset your password.
+                    Ingrese su email para recibir instrucciones de recuperación.
                 </p>
             </div>
             <fieldset class="form-group">
                 <label for="password">
-                    Your email address
+                    Email
                 </label>
-                <input type="email" class="form-control form-control-lg" id="password" placeholder="email address"
+                <input type="email" class="form-control form-control-lg" id="email" placeholder="recovery@myemail.com"
                        autofocus required/>
             </fieldset>
             <button class="btn btn-primary btn-block btn-lg" type="submit">
-                Reset password
+                Solicitar
             </button>
         </form>
     </div>
@@ -29,11 +29,11 @@
 <footer class="text-xs-center p-y-1">
     <p>
         <a href="extra-signin.html">
-            Log in
+            Iniciar sesión
         </a>
         &nbsp;&nbsp;·&nbsp;&nbsp;
         <a href="extra-signup.html">
-            Create an account
+            Regístrate.
         </a>
     </p>
 </footer>

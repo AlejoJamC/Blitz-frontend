@@ -1,82 +1,73 @@
 {{#contentFor 'pageStyles'}}
+    <link rel="stylesheet" href="{{level}}vendor/sweetalert/dist/sweetalert.css">
 {{/contentFor}}
 
 <div class="session-content">
     <div class="card card-block form-layout">
-        <form role="form" action="index.html" id="validate">
+        <form role="form" action="/signup" id="frmSignUp">
+            <input type="hidden" value="{{apiUrl}}" id="api">
             <div class="text-xs-center m-b-3">
-                <img src="images/logo-icon.png" height="80" alt="" class="m-b-1"/>
+                <img src="{{level}}img/logo_circle.png" height="80" alt="" class="m-b-1"/>
                 <h5>
-                    Register now!
+                    Únete al proyecto Blitz.
                 </h5>
                 <p class="text-muted">
-                    Create an app id to continue.
+                    Se requiere crear un usuario para continuar.
                 </p>
             </div>
             <fieldset class="form-group">
-                <label for="email">
-                    Email address
+                <label for="firstname">
+                    Nombres
                 </label>
-                <input type="email" class="form-control form-control-lg" id="email" placeholder="email address"
+                <input type="text" class="form-control form-control-lg" id="firstname" placeholder="mi(s) nombre(s)"/>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="lastname">
+                    Apellidos
+                </label>
+                <input type="text" class="form-control form-control-lg" id="lastname" placeholder="mi(s) apellido(s)"/>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="email">
+                    Email*
+                </label>
+                <input type="email" class="form-control form-control-lg" id="email" placeholder="email@myemail.com"
                        required/>
             </fieldset>
             <fieldset class="form-group">
                 <label for="password">
-                    Password
+                    Contraseña* (al menos 8 caracteres)
                 </label>
-                <input type="password" class="form-control form-control-lg" id="password" placeholder="password"
-                       required minlength="6"/>
+                <input type="password" class="form-control form-control-lg" id="password" placeholder="********"
+                       required minlength="8"/>
             </fieldset>
             <fieldset class="form-group">
                 <label for="cpassword">
-                    Confirm password
+                    Confirmar contraseña*
                 </label>
                 <input type="password" class="form-control form-control-lg" id="cpassword"
-                       placeholder="confirm password" required minlength="6"/>
+                       placeholder="********" required minlength="8"/>
             </fieldset>
             <button class="btn btn-primary btn-block btn-lg" type="submit">
-                Create your account
+                Crear cuenta
             </button>
-            <div class="divider">
-                  <span>
-                    OR
-                  </span>
-            </div>
-            <div class="text-xs-center">
-                <p>
-                    Signup with your social account
-                </p>
-                <button href="javascript:;" class="btn btn-icon-icon btn-facebook btn-lg m-b-1 m-r-1">
-                    <i class="fa fa-facebook">
-                    </i>
-                </button>
-                <button href="javascript:;" class="btn btn-icon-icon btn-github btn-lg m-b-1 m-r-1">
-                    <i class="fa fa-github">
-                    </i>
-                </button>
-                <button href="javascript:;" class="btn btn-icon-icon btn-google btn-lg m-b-1 m-r-1">
-                    <i class="fa fa-google-plus">
-                    </i>
-                </button>
-                <button href="javascript:;" class="btn btn-icon-icon btn-linkedin btn-lg m-b-1 m-r-1">
-                    <i class="fa fa-linkedin">
-                    </i>
-                </button>
-            </div>
         </form>
     </div>
 </div>
 <footer class="text-xs-center p-y-1">
     <p>
         <a href="extra-forgot.html">
-            Forgot password?
+            ¿Olvidaste tu contraseña?
         </a>
         &nbsp;&nbsp;·&nbsp;&nbsp;
         <a href="extra-signin.html">
-            Log in instead
+            Iniciar sesión
         </a>
     </p>
 </footer>
 
 {{#contentFor 'pageScripts'}}
+    <script src="{{level}}vendor/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="{{level}}vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="{{level}}js/signup.js"></script>
 {{/contentFor}}
