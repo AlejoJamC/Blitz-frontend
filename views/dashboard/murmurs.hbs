@@ -1,0 +1,194 @@
+{{#contentFor 'pageStyles'}}
+{{/contentFor}}
+
+<div class="main-content">
+    <div class="content-view">
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="m-b-1">
+                    Sortable Lists
+                </h6>
+                <ul class="sortable-list connectedSortable">
+                    <li>
+                    <span class="tag bg-success pull-right">
+                      6
+                    </span>
+                        Home
+                    </li>
+                    <li>
+                    <span class="tag bg-warning pull-right">
+                      8
+                    </span>
+                        Mailbox
+                    </li>
+                    <li>
+                    <span class="tag bg-danger pull-right">
+                      2
+                    </span>
+                        Group
+                    </li>
+                    <li>
+                    <span class="tag bg-danger pull-right">
+                      6
+                    </span>
+                        Links
+                    </li>
+                    <li>
+                        Attachments
+                    </li>
+                    <li>
+                    <span class="tag bg-primary pull-right">
+                      9
+                    </span>
+                        Tags
+                    </li>
+                    <li>
+                        Settings
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h6 class="m-b-1">
+                    &nbsp;
+                </h6>
+                <ul class="sortable-list connectedSortable">
+                    <li>
+                        Nullam id dolor id nibh ultricies vehicula ut id elit.
+                    </li>
+                    <li>
+                        Cras mattis consectetur purus sit amet fermentum.
+                    </li>
+                    <li>
+                        Maecenas faucibus mollis interdum.
+                    </li>
+                    <li>
+                        Vestibulum id ligula porta felis euismod semper.
+                    </li>
+                    <li>
+                        Sed posuere consectetur est at lobortis.
+                    </li>
+                    <li>
+                        Cras mattis consectetur purus sit amet fermentum.
+                    </li>
+                    <li>
+                        Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row m-t-1">
+            <div class="col-md-6">
+                <h6 class="m-b-1">
+                    Nestable Lists
+                </h6>
+                <div class="cf nestable-lists">
+                    <div class="dd">
+                        <ol class="dd-list">
+                            <li class="dd-item" data-id="1">
+                                <div class="dd-handle">
+                                    Item 1
+                                </div>
+                            </li>
+                            <li class="dd-item" data-id="2">
+                                <div class="dd-handle">
+                                    Item 2
+                                </div>
+                                <ol class="dd-list">
+                                    <li class="dd-item" data-id="3">
+                                        <div class="dd-handle">
+                                            Item 3
+                                        </div>
+                                        <ol class="dd-list">
+                                            <li class="dd-item" data-id="4">
+                                                <div class="dd-handle">
+                                                    Item 4
+                                                </div>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li class="dd-item" data-id="5">
+                                        <div class="dd-handle">
+                                            Item 5
+                                        </div>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li class="dd-item" data-id="6">
+                                <div class="dd-handle">
+                                    Item 6
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h6 class="m-b-1">
+                    &nbsp;
+                </h6>
+                <div class="cf nestable-lists">
+                    <div class="dd">
+                        <ol class="dd-list">
+                            <li class="dd-item dd3-item" data-id="7">
+                                <div class="dd-handle dd3-handle">
+                                    Drag
+                                </div>
+                                <div class="dd3-content">
+                                    Item 7
+                                </div>
+                            </li>
+                            <li class="dd-item dd3-item" data-id="8">
+                                <div class="dd-handle dd3-handle">
+                                    Drag
+                                </div>
+                                <div class="dd3-content">
+                                    Item 8
+                                </div>
+                            </li>
+                            <li class="dd-item dd3-item" data-id="9">
+                                <div class="dd-handle dd3-handle">
+                                    Drag
+                                </div>
+                                <div class="dd3-content">
+                                    Item 9
+                                </div>
+                                <ol class="dd-list">
+                                    <li class="dd-item dd3-item" data-id="10">
+                                        <div class="dd-handle dd3-handle">
+                                            Drag
+                                        </div>
+                                        <div class="dd3-content">
+                                            Item 10
+                                        </div>
+                                    </li>
+                                    <li class="dd-item dd3-item" data-id="1">
+                                        <div class="dd-handle dd3-handle">
+                                            Drag
+                                        </div>
+                                        <div class="dd3-content">
+                                            Item 11
+                                        </div>
+                                    </li>
+                                    <li class="dd-item dd3-item" data-id="12">
+                                        <div class="dd-handle dd3-handle">
+                                            Drag
+                                        </div>
+                                        <div class="dd3-content">
+                                            Item 12
+                                        </div>
+                                    </li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {{>dashboard/footer}}
+</div>
+
+{{#contentFor 'pageScripts'}}
+{{/contentFor}}
