@@ -58,7 +58,8 @@ authRoutes.get('/signup', function (req, res) {
         title: 'Iniciar sesión | Blitz',
         level: '../',
         layout: 'auth',
-        error: error
+        error: error,
+        apiUrl: process.env.API_URL + (process.env.API_PORT !== '' ? ':' + process.env.API_PORT : '') + (process.env.API_VERSION !== '' ? '/' + process.env.API_VERSION : '')
     });
 });
 
