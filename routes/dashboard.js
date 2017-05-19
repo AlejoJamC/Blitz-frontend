@@ -38,4 +38,54 @@ dashboardRoutes.get('/dashboard', function (req, res) {
     });
 });
 
+/* GET User list page. */
+dashboardRoutes.get('/dashboard/users', function (req, res) {
+    // Basic error validator
+    var error = '';
+    // Error
+    if (typeof req.query.error !== 'undefined') {
+        error = req.query.error;
+    }
+    // Session
+    /*
+     if(typeof req.session.userId === 'undefined' || typeof req.session.userId === ''){
+     return res.redirect('/login');
+     }
+     */
+    // User Rol
+    // If ............
+    res.render('dashboard/users', {
+        title: 'Usuarios | Blitz',
+        level: '../../',
+        isHome: true,
+        layout: 'dashboard',
+        error: error
+    });
+});
+
+/* GET Murmur list page. */
+dashboardRoutes.get('/dashboard/murmurs', function (req, res) {
+    // Basic error validator
+    var error = '';
+    // Error
+    if (typeof req.query.error !== 'undefined') {
+        error = req.query.error;
+    }
+    // Session
+    /*
+     if(typeof req.session.userId === 'undefined' || typeof req.session.userId === ''){
+     return res.redirect('/login');
+     }
+     */
+    // User Rol
+    // If ............
+    res.render('dashboard/murmurs', {
+        title: 'Soplos cardíacos | Blitz',
+        level: '../../',
+        isHome: true,
+        layout: 'dashboard',
+        error: error
+    });
+});
+
 module.exports = dashboardRoutes;
