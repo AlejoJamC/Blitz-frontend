@@ -9,13 +9,19 @@
 
     {{>dashboard/sidebar}}
 
-    {{{body}}}
+    <div class="main-panel">
+
+        {{>dashboard/header}}
+
+        {{{body}}}
+
+    </div>
 
     {{>dashboard/chat}}
 
 </div>
 
-{{>dashbaord/scripts}}
+{{>dashboard/scripts}}
 
 </body>
 </html>
