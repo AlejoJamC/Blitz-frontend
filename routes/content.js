@@ -28,9 +28,9 @@ contentRouter.get('/content', function (req, res) {
      }
      */
 
-    res.render('main/landing', {
+    res.render('main/murmurs', {
         title: 'Bachelor\'s Degree Final Project | Blitz',
-        level: '',
+        level: '../',
         isHome: true,
         layout: 'main',
         error: error
@@ -52,7 +52,7 @@ contentRouter.get('/content/:id', function (req, res) {
      }
      */
 
-    res.render('main/landing', {
+    res.render('main/murmurDetail', {
         title: 'Bachelor\'s Degree Final Project | Blitz',
         level: '',
         isHome: true,
