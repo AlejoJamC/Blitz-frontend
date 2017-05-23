@@ -27,8 +27,7 @@ dashboardRoutes.get('/dashboard', function (req, res) {
      return res.redirect('/login');
      }
      */
-    // User Rol
-    // If ............
+
     res.render('dashboard/index', {
         title: 'Sección de administración | Blitz',
         level: '',
@@ -52,8 +51,7 @@ dashboardRoutes.get('/dashboard/users', function (req, res) {
      return res.redirect('/login');
      }
      */
-    // User Rol
-    // If ............
+
     res.render('dashboard/users', {
         title: 'Usuarios | Blitz',
         level: '../../',
@@ -77,8 +75,7 @@ dashboardRoutes.get('/dashboard/murmurs', function (req, res) {
      return res.redirect('/login');
      }
      */
-    // User Rol
-    // If ............
+
     res.render('dashboard/murmurs', {
         title: 'Soplos cardíacos | Blitz',
         level: '../../',

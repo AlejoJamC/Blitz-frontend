@@ -27,8 +27,7 @@ landingRouter.get('/', function (req, res) {
      return res.redirect('/login');
      }
      */
-    // User Rol
-    // If ............
+
     res.render('main/landing', {
         title: 'Bachelor\'s Degree Final Project | Blitz',
         level: '',
@@ -52,8 +51,7 @@ landingRouter.get('/about', function (req, res) {
      return res.redirect('/login');
      }
      */
-    // User Rol
-    // If ............
+
     res.render('main/about', {
         title: 'Acerca de Blitz | Blitz',
         level: '../',
@@ -76,8 +74,7 @@ landingRouter.get('/contact', function (req, res) {
      return res.redirect('/login');
      }
      */
-    // User Rol
-    // If ............
+
     res.render('main/contact', {
         title: 'Contacto | Blitz',
         level: '../',
@@ -100,8 +97,7 @@ landingRouter.get('/help', function (req, res) {
      return res.redirect('/login');
      }
      */
-    // User Rol
-    // If ............
+
     res.render('landing/help', {
         title: 'Ayuda | Moon HR',
         level: '../',
@@ -125,8 +121,7 @@ landingRouter.get('/pricing', function (req, res) {
      return res.redirect('/login');
      }
      */
-    // User Rol
-    // If ............
+
     res.render('landing/pricing', {
         title: 'Planes | Moon HR',
         level: '../',
@@ -150,8 +145,7 @@ landingRouter.get('/privacy', function (req, res) {
      return res.redirect('/login');
      }
      */
-    // User Rol
-    // If ............
+
     res.render('landing/privacy', {
         title: 'Politicas de privacidad | Moon HR',
         level: '../',
@@ -175,8 +169,7 @@ landingRouter.get('/sitemap', function (req, res) {
      return res.redirect('/login');
      }
      */
-    // User Rol
-    // If ............
+
     res.render('landing/sitemap', {
         title: 'Mapa del sitio | Moon HR',
         level: '../',
@@ -200,8 +193,7 @@ landingRouter.get('/terms', function (req, res) {
      return res.redirect('/login');
      }
      */
-    // User Rol
-    // If ............
+
     res.render('landing/terms', {
         title: 'Terminos y condiciones | Moon HR',
         level: '../',
