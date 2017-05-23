@@ -37,10 +37,12 @@ function SetupWebRouter(app) {
      *  Declare all routes
      */
     var landingRoutes = require('./landing');
+    var contentRoutes = require('./content');
     var dashbaordRoutes = require('./dashboard');
     var authRoutes = require('./auth');
 
     app.use('/', landingRoutes);
+    app.use('/', contentRoutes);
     app.use('/', dashbaordRoutes);
     app.use('/', authRoutes);
 
