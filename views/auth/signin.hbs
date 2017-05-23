@@ -1,9 +1,10 @@
 {{#contentFor 'pageStyles'}}
+    <link rel="stylesheet" href="{{level}}vendor/sweetalert/dist/sweetalert.css">
 {{/contentFor}}
 
 <div class="session-content">
     <div class="card card-block form-layout">
-        <form role="form" action="/login" id="validate">
+        <form role="form" action="/login" id="frmlogin">
             <div class="text-xs-center m-b-3">
                 <img src="{{level}}img/logo_circle.png" height="80" alt="" class="m-b-1"/>
                 <h5>
@@ -50,4 +51,7 @@
 </footer>
 
 {{#contentFor 'pageScripts'}}
+    <script src="{{level}}vendor/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="{{level}}vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="{{level}}js/signin.js"></script>
 {{/contentFor}}
