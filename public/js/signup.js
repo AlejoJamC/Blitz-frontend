@@ -24,7 +24,6 @@
         var $email = $('#email');
         var $password = $('#password');
         var $cpassword = $('#cpassword');
-        var $api = $('#api');
 
         if ($email.val() === '' || $password.val() === '' || $cpassword.val() === '') {
             return swal("Oops...", "Por favor completar los campos requeridos*", "error");
@@ -50,7 +49,7 @@
         }, function () {
             $.ajax({
                 method: "POST",
-                url: $api.val() + '/users',
+                url: '/signup/ajax',
                 data:{
                     "firstName" : $firstname.val(),
                     "lastName" : $lastname.val(),
@@ -58,26 +57,52 @@
                     "password" : $password.val()
                 }
             }).done(function (data) {
-                // TODO: capturar errores de respuesta
-                // TODO: verificar como cargar el Bearer Token sin exponerlo
-                // TODO: posiblemente usar Base64
                 console.log(data);
-                swal({
-                        title: data.message,
-                        message: "",
-                        type: "success",
-                        confirmButtonText: "Salir",
-                        confirmButtonClass: "btn-warning",
-                        showCancelButton: true,
-                        cancelButtonClass: "btn-success",
-                        cancelButtonText: "Iniciar sesión",
-                        closeOnConfirm: true
-                    },
-                    function (isConfirm) {
-                        if (isConfirm) {
-                            window.location.href = "/login";
+                var message = '';
+                // validate if duplicate error is throw out
+                if(data.statusCode !== 'undefined' && data.statusCode === 200){
+                    if(data.body.data !== 'undefined'){
+                        if(data.body.data.code !== 'undefined' && data.body.data.code === 11000){
+                            message = 'Error creando el usuario, el correo electronico ya existe';
+                            swal({
+                                title: message,
+                                message: '',
+                                type: "error",
+                                confirmButtonText: "Reintentar",
+                                confirmButtonClass: "btn-error"
+                            });
                         }
-                    });
+                    }else{
+                        message = 'Usuario creado exitosamente.';
+                        swal({
+                                title: message,
+                                message: '',
+                                type: "success",
+                                confirmButtonText: "Iniciar sesión",
+                                confirmButtonClass: "btn-warning",
+                                showCancelButton: true,
+                                cancelButtonClass: "btn-success",
+                                cancelButtonText: "Salir",
+                                closeOnConfirm: true
+                            },
+                            function (isConfirm) {
+                                if (isConfirm) {
+                                    window.location.href = "/login";
+                                }else{
+                                    window.location.href = "/signup";
+                                }
+                            });
+                    }
+                }else{
+                    message = 'Error creando el usuario.';
+                    swal({
+                            title: message,
+                            message: '',
+                            type: "error",
+                            confirmButtonText: "Reintentar",
+                            confirmButtonClass: "btn-error"
+                        });
+                }
             });
         });
     }
