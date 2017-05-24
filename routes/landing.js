@@ -45,12 +45,6 @@ landingRouter.get('/about', function (req, res) {
     if (typeof req.query.error !== 'undefined') {
         error = req.query.error;
     }
-    // Session
-    /*
-     if(typeof req.session.userId === 'undefined' || typeof req.session.userId === ''){
-     return res.redirect('/login');
-     }
-     */
 
     res.render('main/about', {
         title: 'Acerca de Blitz | Blitz',
@@ -68,12 +62,6 @@ landingRouter.get('/contact', function (req, res) {
     if (typeof req.query.error !== 'undefined') {
         error = req.query.error;
     }
-    // Session
-    /*
-     if(typeof req.session.userId === 'undefined' || typeof req.session.userId === ''){
-     return res.redirect('/login');
-     }
-     */
 
     res.render('main/contact', {
         title: 'Contacto | Blitz',
@@ -83,47 +71,17 @@ landingRouter.get('/contact', function (req, res) {
     });
 });
 
-/* GET Help page. */
-landingRouter.get('/help', function (req, res) {
+/* GET Terms page. */
+landingRouter.get('/terms', function (req, res) {
     // Basic error validator
     var error = '';
     // Error
     if (typeof req.query.error !== 'undefined') {
         error = req.query.error;
     }
-    // Session
-    /*
-     if(typeof req.session.userId === 'undefined' || typeof req.session.userId === ''){
-     return res.redirect('/login');
-     }
-     */
 
-    res.render('landing/help', {
-        title: 'Ayuda | Moon HR',
-        level: '../',
-        isHome: false,
-        layout: 'landing/struct',
-        error: error
-    });
-});
-
-/* GET Pricing page. */
-landingRouter.get('/pricing', function (req, res) {
-    // Basic error validator
-    var error = '';
-    // Error
-    if (typeof req.query.error !== 'undefined') {
-        error = req.query.error;
-    }
-    // Session
-    /*
-     if(typeof req.session.userId === 'undefined' || typeof req.session.userId === ''){
-     return res.redirect('/login');
-     }
-     */
-
-    res.render('landing/pricing', {
-        title: 'Planes | Moon HR',
+    res.render('landing/terms', {
+        title: 'Terminos y condiciones | Moon HR',
         level: '../',
         isHome: false,
         layout: 'landing/struct',
@@ -139,12 +97,6 @@ landingRouter.get('/privacy', function (req, res) {
     if (typeof req.query.error !== 'undefined') {
         error = req.query.error;
     }
-    // Session
-    /*
-     if(typeof req.session.userId === 'undefined' || typeof req.session.userId === ''){
-     return res.redirect('/login');
-     }
-     */
 
     res.render('landing/privacy', {
         title: 'Politicas de privacidad | Moon HR',
@@ -163,39 +115,9 @@ landingRouter.get('/sitemap', function (req, res) {
     if (typeof req.query.error !== 'undefined') {
         error = req.query.error;
     }
-    // Session
-    /*
-     if(typeof req.session.userId === 'undefined' || typeof req.session.userId === ''){
-     return res.redirect('/login');
-     }
-     */
 
     res.render('landing/sitemap', {
         title: 'Mapa del sitio | Moon HR',
-        level: '../',
-        isHome: false,
-        layout: 'landing/struct',
-        error: error
-    });
-});
-
-/* GET Terms page. */
-landingRouter.get('/terms', function (req, res) {
-    // Basic error validator
-    var error = '';
-    // Error
-    if (typeof req.query.error !== 'undefined') {
-        error = req.query.error;
-    }
-    // Session
-    /*
-     if(typeof req.session.userId === 'undefined' || typeof req.session.userId === ''){
-     return res.redirect('/login');
-     }
-     */
-
-    res.render('landing/terms', {
-        title: 'Terminos y condiciones | Moon HR',
         level: '../',
         isHome: false,
         layout: 'landing/struct',
