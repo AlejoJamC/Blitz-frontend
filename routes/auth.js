@@ -62,11 +62,9 @@ authRoutes.post('/login/ajax', function (req, res) {
     var tokenCompose = email + ':' + password;
     tokenCompose = new Buffer(tokenCompose).toString('base64');
 
-    logger.info(api + '/login');
-
     // Request options
     var options = {
-        url: api + '/users',
+        url: api + '/login',
         headers: {
             'Authorization': 'Basic ' + tokenCompose,
             'Content-Type': 'application/json'
@@ -75,6 +73,12 @@ authRoutes.post('/login/ajax', function (req, res) {
     };
 
     request.get(options, function (err, httpResponse, body) {
+        // Request error
+        if(err){
+            logger.error(err);
+            return res.status(500).send(err);
+        }
+
         if (httpResponse.statusCode !== 200) {
             switch (httpResponse.statusCode) {
                 case 400:
@@ -106,6 +110,13 @@ authRoutes.post('/login/ajax', function (req, res) {
                     });
                     break;
             }
+        }
+
+        if(httpResponse.statusCode === 200){
+            var objBody = JSON.parse(body);
+            req.session.userId =  objBody.data._id;
+            req.session.userEmail = email;
+            req.session.compose = tokenCompose;
         }
 
         return res.send(httpResponse);
@@ -179,6 +190,12 @@ authRoutes.post('/signup/ajax', function (req, res) {
     };
 
     request.post(options, function (err, httpResponse, body) {
+        // Request error
+        if(err){
+            logger.error(err);
+            return res.status(500).send(err);
+        }
+
         if (httpResponse.statusCode !== 200) {
             switch (httpResponse.statusCode) {
                 case 400:
@@ -283,6 +300,12 @@ authRoutes.post('/forgot/ajax', function (req, res) {
     };
 
     request.post(options, function (err, httpResponse, body) {
+        // Request error
+        if(err){
+            logger.error(err);
+            return res.status(500).send(err);
+        }
+
         if (httpResponse.statusCode !== 200) {
             switch (httpResponse.statusCode) {
                 case 400:
@@ -315,9 +338,6 @@ authRoutes.post('/forgot/ajax', function (req, res) {
                     break;
             }
         }
-
-        logger.info(JSON.stringify(httpResponse));
-        logger.info(JSON.stringify(body));
 
         return body;
     });
