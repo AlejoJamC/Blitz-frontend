@@ -7,7 +7,7 @@
  */
 
 /**
- * Sweetalerts demo page
+ * Sweetalerts
  */
 (function ($) {
     'use strict';
