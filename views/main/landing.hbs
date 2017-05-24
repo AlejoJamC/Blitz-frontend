@@ -1,37 +1,13 @@
 {{#contentFor 'pageStyles'}}
 {{/contentFor}}
 
-<header id="masthead" class="site-header">
-    <div class="ish-container-fluid">
-        <div class="ish-container-inner">
-            <div class="ish-row">
-                <div class="ish-header">
-                    <!-- Main Logo & Tagline -->
-                    <div class="ish-logo-container ish-txt-color3">
-                        <a href=""><span class="ish-logo-box"><span class="ish-logo-middle"><img
-                                src="{{level}}img/logo.svg" class="ish-logo" alt="QUSQ logo"/></span></span></a>
-                        <span class="ish-theme-tagline ish-vertical">Unique Portfolio</span>
-                    </div>
-
-                    <!-- Menu open Button -->
-                    <div class="ish-menu-container ish-txt-color3">
-                        <a href="#"><span class="ish-icon-nav"><i class="ish-icon-menu"></i></span><span
-                                class="ish-menu-desc ish-vertical">Menu</span></a>
-                    </div>
-                </div>
-                <div class="site-branding">
-                    <h1 class="site-title">When <span>Love</span><br> &amp; <span>Passion</span> meet</h1>
-                    <h2 class="site-subtitle">beautiful <span>things</span> start to <span>work</span>!</h2>
-                    <p class="site-description"><span>You don't believe?</span></p>
-                </div><!-- .site-branding -->
-            </div>
-            {{>main/sidebar}}
-        </div>
-    </div>
-    <div class="ish-decor-container">
-        <div class="ish-decor-bottom ish-theme-rotate"></div>
-    </div>
-</header>
+{{#contentFor 'headerText'}}
+    <div class="site-branding">
+        <h1 class="site-title">When <span>Love</span><br> &amp; <span>Passion</span> meet</h1>
+        <h2 class="site-subtitle">beautiful <span>things</span> start to <span>work</span>!</h2>
+        <p class="site-description"><span>You don't believe?</span></p>
+    </div><!-- .site-branding -->
+{{/contentFor}}
 
 <div id="content" class="site-content ish-content-parallax">
     <div id="primary" class="content-area">
