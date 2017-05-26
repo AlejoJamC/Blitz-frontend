@@ -9,3 +9,11 @@
 .ish-bg-blitz-1 {
     background-color: #c87f0a
 }
+
+.ng-active>div[ng-message] {
+    color: red;
+}
+
+.ng-invalid {
+    border-color: red;
+}
