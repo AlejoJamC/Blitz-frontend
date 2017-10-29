@@ -1,0 +1,57 @@
+{{#contentFor 'pageStyles'}}
+    <link rel="stylesheet" href="{{level}}vendor/sweetalert/dist/sweetalert.css">
+{{/contentFor}}
+
+<div class="session-content">
+    <div class="card card-block form-layout">
+        <form role="form" action="/login" id="frmlogin">
+            <div class="text-xs-center m-b-3">
+                <img src="{{level}}img/logo_circle.png" height="80" alt="" class="m-b-1"/>
+                <h5>
+                    Bienvenidos al proyecto Blitz.
+                </h5>
+                <p class="text-muted">
+                    Por favor inicie sesión para continuar.
+                </p>
+            </div>
+            <fieldset class="form-group">
+                <label for="username">
+                    Email
+                </label>
+                <input type="text" class="form-control form-control-lg" id="email" placeholder="email@myemail.com" required/>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="password">
+                    Contraseña
+                </label>
+                <input type="password" class="form-control form-control-lg" id="password" placeholder="********"
+                       required/>
+            </fieldset>
+            <label class="custom-control custom-checkbox m-b-1">
+                <input type="checkbox" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Recordar mis datos</span>
+            </label>
+            <button class="btn btn-primary btn-block btn-lg" type="submit">
+                Iniciar sesión
+            </button>
+        </form>
+    </div>
+</div>
+<footer class="text-xs-center p-y-1">
+    <p>
+        <a href="/forgot">
+            ¿Olvidaste tu contraseña?
+        </a>
+        &nbsp;&nbsp;·&nbsp;&nbsp;
+        <a href="/signup">
+            Regístrate.
+        </a>
+    </p>
+</footer>
+
+{{#contentFor 'pageScripts'}}
+    <script src="{{level}}vendor/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="{{level}}vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="{{level}}js/signin.js"></script>
+{{/contentFor}}

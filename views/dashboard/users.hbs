@@ -1,0 +1,136 @@
+{{#contentFor 'pageStyles'}}
+<link rel="stylesheet" href="{{level}}vendor/sweetalert/dist/sweetalert.css"> 
+<link rel="stylesheet" href="{{level}}css/blitz.css"> 
+{{/contentFor}}
+
+<div class="main-content" ng-app="blitz">
+    <div class="content-view" ng-controller="ctrlUsers">
+        <div class="layout-xs contacts-container">
+            <div class="flexbox-xs layout-column-xs contacts-list b-r">
+                <div class="contact-header bg-default">
+                    <div class="contact-toolbar">
+                        <form class="form-inline">
+                            <input class="form-control" type="text" placeholder="Buscar" ng-model="search" />
+                        </form>
+                    </div>
+                </div>
+                <div class="flex-xs scroll-y">
+                    <a class="column-equal">
+                        <button type="button" class="btn btn-primary  btn-icon btn-block m-r-xs m-b-xs" ng-click="newUser()">
+                            <i class="material-icons">add</i> Usuario Nuevo
+                        </button>
+                    </a>
+                    <a class="column-equal" data-toggle="contact" ng-repeat="user in users | filter:search as results" ng-click="showUser(user)">
+                        <div class="col v-align-middle contact-avatar">
+                            <div class="circle-icon bg-danger">{[{(user.firstName)?user.firstName:user.email|firstLetter}]}</div>
+                        </div>
+                        <div class="col v-align-middle contact-details p-l-1">
+                            <span class="bold" ng-if="user.firstName&&user.lastName">{[{user.firstName}]} {[{user.lastName}]}</span>
+                            <span class="small">{[{user.email}]}</span>
+                        </div>
+                    </a>
+                    <a class="column-equal" ng-if="results.length === 0">
+                        no hay resultados para la busqueda
+                    </a>
+                </div>
+            </div>
+            <div class="flexbox-xs layout-column-xs contact-view">
+                <div class="flex-xs scroll-y p-a-3">
+                    <div class="column-equal m-b-2" ng-show="shHead">
+                        <div class="col" style="width:128px;">
+                            <img src="{{level}}images/face1.jpg" class="avatar avatar-lg img-circle" alt="">
+                        </div>
+                        <div class="col v-align-middle p-l-2">
+                            <h1>
+                                <b>{[{slUser.firstName}]}</b> {[{slUser.lastName}]}
+                                <h3>{[{slUser.email}]}</h3>
+                                 <button class="btn btn-icon-icon btn-sm btn-primary" ng-click="updateUser()" ng-hide="add">
+                                    <i class="fa fa-edit">
+                                    </i>
+                                </button>
+                                <button class="btn btn-icon-icon btn-sm btn-adn" ng-hide="add" ng-click="deleteUser()">
+                                    <i class="fa  fa-trash-o">
+                                    </i>
+                                </button>
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="column-equal m-b-2" ng-show="(update||add)">
+                        <h3 ng-show="add">Crear usuario</h3>
+                        <form name="frm_User" ng-submit="saveOrUpdateUser()" novalidate>
+                            <fieldset class="form-group">
+                                <label for="txtFirstName">
+                                    Nombres
+                                </label>
+                                <input type="text" class="form-control" name="txtFirstName" id="txtFirstName" placeholder="Mi(s) Nombre(s)" ng-model="frmUser.firstName" />
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <label for="txtLastName">
+                                    Apellidos
+                                </label>
+                                <input type="text" class="form-control" name="txtLastName" id="txtLastName" placeholder="Mi(s) Apellidos(s)" ng-model="frmUser.lastName" />
+                            </fieldset>
+                            <fieldset class="form-group" ng-show="add">
+                                <label for="txtEmail">
+                                    Email*
+                                </label>
+                                <input type="email" class="form-control" name="txtEmail" id="txtEmail" placeholder="email@myemail.com" ng-model="frmUser.email" ng-required="add"
+                                ng-disabled="update"/>
+                                <div ng-messages="frm_User.txtEmail.$error" role="alert">
+                                    <div ng-message="required">Campo requerido</div>
+                                    <div ng-message="email">Email invalido.</div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <label for="txtPass">
+                                    Contraseña{[{add?'*':''}]} (al menos 8 caracteres)
+                                </label>
+                                <input type="password" class="form-control" name="txtPass" id="txtPass" placeholder="***********" ng-model="frmUser.pass" minlength="8" ng-required="add"/>
+                                <div ng-messages="frm_User.txtPass.$error" role="alert">
+                                    <div ng-message="required">Campo requerido</div>
+                                    <div ng-message="minlength">Como m&iacute;nimo 8 caracteres.</div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <label for="txtPassConf">
+                                    Confirmar{[{add?'*':''}]} Contraseña
+                                </label>
+                                <input type="password" class="form-control" name="txtPassConf" id="txtPassConf" placeholder="***********" ng-model="frmUser.confPass" compare-to="frmUser.pass"
+                                    minlength="8" ng-required="add"/>
+                                <div ng-messages="frm_User.txtPassConf.$error" role="alert">
+                                    <div ng-message="required">Campo requerido</div>
+                                    <div ng-message="minlength">Como m&iacute;nimo 8 caracteres.</div>
+                                    <div ng-message="compareTo">Las Contraseñas no coinciden.</div>
+                                </div>
+                            </fieldset>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="chkStatus" ng-model="frmUser.status"/>
+                                    Estado
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-primary" ng-disabled="!frm_User.$dirty||frm_User.$invalid">
+                                {[{update?'Actualizar Datos':'Guardar'}]}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div ng-if="!shHead&&!add" class="no-contacts flexbox-xs fill-container p-a-3">
+                    <div class="h3 text-shadow text-muted">Seleccione una persona</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{>dashboard/footer}}
+
+</div>
+
+{{#contentFor 'pageScripts'}}
+<script src="{{level}}vendor/jquery/dist/jquery.min.js"></script>
+<script src="{{level}}vendor/sweetalert/dist/sweetalert.min.js"></script>
+<script src="{{level}}vendor/angular/angular.min.js"></script>
+<script src="{{level}}vendor/angular-sweetalert/SweetAlert.min.js"></script>
+<script src="{{level}}vendor/angular-messages/angular-messages.min.js"></script>
+<script src="{{level}}js/users.js"></script>
+{{/contentFor}}

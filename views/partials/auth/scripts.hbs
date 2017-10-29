@@ -1,0 +1,32 @@
+<script type="text/javascript">
+    window.paceOptions = {
+        document: true,
+        eventLag: true,
+        restartOnPushState: true,
+        restartOnRequestAfter: true,
+        ajax: {
+            trackMethods: [ 'POST','GET']
+        }
+    };
+</script>
+
+<!-- build:js({.tmp,app}) scripts/app.min.js -->
+<script src="{{level}}vendor/jquery/dist/jquery.js"></script>
+<script src="{{level}}vendor/pace/pace.js"></script>
+<script src="{{level}}vendor/tether/dist/js/tether.js"></script>
+<script src="{{level}}vendor/bootstrap/dist/js/bootstrap.js"></script>
+<script src="{{level}}vendor/fastclick/lib/fastclick.js"></script>
+<script src="{{level}}scripts/constants.js"></script>
+<!-- endbuild -->
+
+<!-- page scripts -->
+<script src="{{level}}vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+<!-- end page scripts -->
+
+<!-- initialize page scripts -->
+<script type="text/javascript">
+    $('#validate').validate();
+</script>
+<!-- end initialize page scripts -->
+
+{{{block 'pageScripts'}}}
