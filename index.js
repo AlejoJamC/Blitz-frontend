@@ -80,7 +80,7 @@ app.use(bodyParser.urlencoded({
 // General files
 app.use(express.static(path.join(__dirname, 'public')));
 // Landing files
-app.use(express.static(path.join(__dirname, 'public', 'qusq')));
+app.use(express.static(path.join(__dirname, 'public', 'united')));
 // Dashboard files
 app.use(express.static(path.join(__dirname, 'public','milestone')));
 
