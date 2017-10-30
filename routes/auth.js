@@ -46,12 +46,6 @@ authRoutes.post('/login/ajax', function (req, res) {
     if (typeof req.query.error !== 'undefined') {
         error = req.query.error;
     }
-    // Session
-    /*
-     if(typeof req.session.userId === 'undefined' || typeof req.session.userId === ''){
-     return res.redirect('/login');
-     }
-     */
 
     var email = req.body.email;
     var password = req.body.password;
@@ -131,15 +125,9 @@ authRoutes.get('/signup', function (req, res) {
     if (typeof req.query.error !== 'undefined') {
         error = req.query.error;
     }
-    // Session
-    /*
-     if(typeof req.session.userId === 'undefined' || typeof req.session.userId === ''){
-     return res.redirect('/login');
-     }
-     */
 
     res.render('auth/signup', {
-        title: 'Iniciar sesión | Blitz',
+        title: 'Crear un nuevo usuario | Blitz',
         level: '../',
         layout: 'auth',
         error: error
@@ -241,12 +229,6 @@ authRoutes.get('/forgot', function (req, res) {
     if (typeof req.query.error !== 'undefined') {
         error = req.query.error;
     }
-    // Session
-    /*
-     if(typeof req.session.userId === 'undefined' || typeof req.session.userId === ''){
-     return res.redirect('/login');
-     }
-     */
 
     res.render('auth/forgot', {
         title: 'Recuperar contraseña | Blitz',
@@ -264,12 +246,6 @@ authRoutes.post('/forgot/ajax', function (req, res) {
     if (typeof req.query.error !== 'undefined') {
         error = req.query.error;
     }
-    // Session
-    /*
-     if(typeof req.session.userId === 'undefined' || typeof req.session.userId === ''){
-     return res.redirect('/login');
-     }
-     */
 
     var firstname = req.body.firstname;
     var lastname = req.body.lastname;
@@ -342,7 +318,6 @@ authRoutes.post('/forgot/ajax', function (req, res) {
         return body;
     });
 });
-
 
 /* GET Logout page. */
 authRoutes.get('/logout', function (req, res) {
