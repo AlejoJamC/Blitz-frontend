@@ -20,19 +20,15 @@ landingRouter.get('/', function (req, res) {
     // Error
     if (typeof req.query.error !== 'undefined') {
         error = req.query.error;
+        logger.error(error);
     }
-    // Session
-    /*
-     if(typeof req.session.userId === 'undefined' || typeof req.session.userId === ''){
-     return res.redirect('/login');
-     }
-     */
 
-    res.render('main/landing', {
-        title: 'Bachelor\'s Degree Final Project | Blitz',
+    res.render('landing/main', {
+        title: 'Proyecto de grado de @AlejoJamC | Blitz',
         level: '',
         isHome: true,
-        layout: 'main',
+        layout: 'landing',
+        homeActive : true,
         error: error
     });
 });
@@ -44,12 +40,14 @@ landingRouter.get('/about', function (req, res) {
     // Error
     if (typeof req.query.error !== 'undefined') {
         error = req.query.error;
+        logger.error(error);
     }
 
-    res.render('main/about', {
+    res.render('landing/about', {
         title: 'Acerca de Blitz | Blitz',
         level: '../',
-        layout: 'main',
+        layout: 'landing',
+        aboutActive : true,
         error: error
     });
 });
@@ -61,12 +59,14 @@ landingRouter.get('/contact', function (req, res) {
     // Error
     if (typeof req.query.error !== 'undefined') {
         error = req.query.error;
+        logger.error(error);
     }
 
-    res.render('main/contact', {
+    res.render('landing/contact', {
         title: 'Contacto | Blitz',
         level: '../',
-        layout: 'main',
+        layout: 'landing',
+        contactActive : true,
         error: error
     });
 });
@@ -78,13 +78,14 @@ landingRouter.get('/terms', function (req, res) {
     // Error
     if (typeof req.query.error !== 'undefined') {
         error = req.query.error;
+        logger.error(error);
     }
 
     res.render('landing/terms', {
-        title: 'Terminos y condiciones | Moon HR',
+        title: 'Terminos y condiciones | Blitz',
         level: '../',
         isHome: false,
-        layout: 'landing/struct',
+        layout: 'landing',
         error: error
     });
 });
@@ -96,13 +97,14 @@ landingRouter.get('/privacy', function (req, res) {
     // Error
     if (typeof req.query.error !== 'undefined') {
         error = req.query.error;
+        logger.error(error);
     }
 
     res.render('landing/privacy', {
-        title: 'Politicas de privacidad | Moon HR',
+        title: 'Politicas de privacidad | Blitz',
         level: '../',
         isHome: false,
-        layout: 'landing/struct',
+        layout: 'landing',
         error: error
     });
 });
@@ -114,13 +116,14 @@ landingRouter.get('/sitemap', function (req, res) {
     // Error
     if (typeof req.query.error !== 'undefined') {
         error = req.query.error;
+        logger.error(error);
     }
 
     res.render('landing/sitemap', {
-        title: 'Mapa del sitio | Moon HR',
+        title: 'Mapa del sitio | Blitz',
         level: '../',
         isHome: false,
-        layout: 'landing/struct',
+        layout: 'landing',
         error: error
     });
 });
