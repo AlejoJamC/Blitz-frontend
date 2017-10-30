@@ -30,7 +30,7 @@ dashboardRoutes.get('/dashboard', function(req, res) {
      */
 
     res.render('dashboard/index', {
-        title: 'Sección de administración | Blitz',
+        title: 'Sección de administración | Administración | Blitz',
         level: '',
         isHome: true,
         layout: 'dashboard',
@@ -54,7 +54,7 @@ dashboardRoutes.get('/dashboard/users', function(req, res) {
      */
 
     res.render('dashboard/users', {
-        title: 'Usuarios | Blitz',
+        title: 'Usuarios | Administración | Blitz',
         level: '../../',
         isHome: true,
         layout: 'dashboard',
@@ -77,7 +77,7 @@ dashboardRoutes.get('/dashboard/admins', function(req, res) {
      */
 
     res.render('dashboard/admins', {
-        title: 'Administradores | Blitz',
+        title: 'Administradores | Administración | Blitz',
         level: '../../',
         isHome: true,
         layout: 'dashboard',
@@ -100,7 +100,7 @@ dashboardRoutes.get('/dashboard/murmurs', function(req, res) {
      */
 
     res.render('dashboard/murmurs', {
-        title: 'Soplos cardíacos | Blitz',
+        title: 'Soplos cardíacos | Administración | Blitz',
         level: '../../',
         isHome: true,
         layout: 'dashboard',
@@ -742,4 +742,5 @@ dashboardRoutes.delete('/admins/ajax/:id', function(req, res) {
         return res.send(httpResponse);
     });
 });
+
 module.exports = dashboardRoutes;
