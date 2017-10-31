@@ -5,7 +5,9 @@
 .env
 
 # Ignore html, css and JS from Premium templates
-*.html
+public/**/*.html
+views/**/*.html
+
 # QUSQ
 public/qusq/
 # Milestone
