@@ -1,0 +1,48 @@
+<header class="header header-topbar-hidden header-boxed-width navbar-fixed-top header-background-trans header-navibox-1-left header-navibox-2-right">
+    <div class="container container-boxed-width">
+        <div class="top-bar">
+            <div class="container">
+                <div class="header-topbarbox-1">
+                    <ul>
+                        <li>WE HELPING YOU: INFO@YOURSITE.COM</li>
+                    </ul>
+                </div>
+                <div class="header-topbarbox-2">
+                    <ul class="social-links">
+                        <li><a href="/" target="_blank"><i class="social_icons fa fa-facebook-square"></i></a></li>
+                        <li><a href="/" target="_blank"><i class="social_icons fa fa-youtube-square"></i></a></li>
+                        <li><a href="/" target="_blank"><i class="social_icons fa fa-vimeo-square"></i></a></li>
+                        <li><a href="/" target="_blank"><i class="social_icons fa fa-twitter-square"></i></a></li>
+                        <li class="li-last"><a href="/" target="_blank"><i
+                                class="social_icons fa fa-tumblr-square"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar" id="nav">
+
+
+            <div class="header-navibox-1">
+                <!-- Mobile Trigger Start-->
+                <button class="menu-mobile-button visible-xs-block js-toggle-mobile-slidebar toggle-menu-button"><i
+                        class="toggle-menu-button-icon"><span></span><span></span><span></span><span></span><span></span><span></span></i>
+                </button>
+                <div class="ui-decor-1 ui-decor-1_sm"></div><!-- Mobile Trigger End-->
+                <a class="navbar-brand scroll" href="/">
+                    <img class="normal-logo" height="48" width="48" src="{{level}}img/logo.jpg" alt="logo"/>
+                    <img class="scroll-logo hidden-xs" height="48" width="48" src="{{level}}img/logo.jpg" alt="logo"/>
+                </a>
+            </div>
+
+
+            <div class="header-navibox-2">
+                <ul class="yamm main-menu nav navbar-nav">
+                    <li {{#if listActive }} class="dropdown active" {{/if}}><a href="/content">Lista</a></li>
+                    <li><a href="/logout">Cerrar Sesión</a></li>
+                </ul>
+            </div>
+
+        </nav>
+    </div>
+</header>
+<!-- end .header-->
