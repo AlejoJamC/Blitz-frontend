@@ -159,8 +159,6 @@ authRoutes.post('/signup/ajax', function (req, res) {
 
     var token = process.env.API_AUTH;
 
-    logger.info(api + '/users');
-
     // Request options
     var options = {
         url: api + '/users',
@@ -323,7 +321,8 @@ authRoutes.post('/forgot/ajax', function (req, res) {
 authRoutes.get('/logout', function (req, res) {
     req.session.destroy(function (err) {
         if (err) {
-            logger.info(err);
+            logger.error(err);
+            res.redirect('/login?error=101');
         }
         res.redirect('/login');
     });
