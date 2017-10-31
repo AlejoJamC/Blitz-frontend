@@ -29,7 +29,7 @@
             return swal("Oops...", "Por favor completar los campos requeridos*", "error");
         }
 
-        if($password.val() !== $cpassword.val()){
+        if ($password.val() !== $cpassword.val()) {
             return swal("Oops...", "Las contraseñas no coinciden", "error");
         }
 
@@ -50,19 +50,18 @@
             $.ajax({
                 method: "POST",
                 url: '/signup/ajax',
-                data:{
-                    "firstName" : $firstname.val(),
-                    "lastName" : $lastname.val(),
-                    "email" : $email.val(),
-                    "password" : $password.val()
+                data: {
+                    "firstName": $firstname.val(),
+                    "lastName": $lastname.val(),
+                    "email": $email.val(),
+                    "password": $password.val()
                 }
             }).done(function (data) {
-                console.log(data);
                 var message = '';
                 // validate if duplicate error is throw out
-                if(data.statusCode !== 'undefined' && data.statusCode === 200){
-                    if(data.body.data !== 'undefined'){
-                        if(data.body.data.code !== 'undefined' && data.body.data.code === 11000){
+                if (data.statusCode !== 'undefined' && data.statusCode === 200) {
+                    if (data.body.data !== 'undefined') {
+                        if (data.body.data.code !== 'undefined' && data.body.data.code === 11000) {
                             message = 'Error creando el usuario, el correo electronico ya existe';
                             swal({
                                 title: message,
@@ -71,8 +70,37 @@
                                 confirmButtonText: "Reintentar",
                                 confirmButtonClass: "btn-error"
                             });
+                        } else if (data.body.data.email === $email.val()) {
+                            message = 'Usuario creado exitosamente.';
+                            swal({
+                                    title: message,
+                                    message: '',
+                                    type: "success",
+                                    confirmButtonText: "Iniciar sesión",
+                                    confirmButtonClass: "btn-warning",
+                                    showCancelButton: true,
+                                    cancelButtonClass: "btn-success",
+                                    cancelButtonText: "Salir",
+                                    closeOnConfirm: true
+                                },
+                                function (isConfirm) {
+                                    if (isConfirm) {
+                                        window.location.href = "/login";
+                                    } else {
+                                        window.location.href = "/signup";
+                                    }
+                                });
+                        } else {
+                            message = 'Error creando el usuario.';
+                            swal({
+                                title: message,
+                                message: '',
+                                type: "error",
+                                confirmButtonText: "Reintentar",
+                                confirmButtonClass: "btn-error"
+                            });
                         }
-                    }else{
+                    } else {
                         message = 'Usuario creado exitosamente.';
                         swal({
                                 title: message,
@@ -88,20 +116,20 @@
                             function (isConfirm) {
                                 if (isConfirm) {
                                     window.location.href = "/login";
-                                }else{
+                                } else {
                                     window.location.href = "/signup";
                                 }
                             });
                     }
-                }else{
+                } else {
                     message = 'Error creando el usuario.';
                     swal({
-                            title: message,
-                            message: '',
-                            type: "error",
-                            confirmButtonText: "Reintentar",
-                            confirmButtonClass: "btn-error"
-                        });
+                        title: message,
+                        message: '',
+                        type: "error",
+                        confirmButtonText: "Reintentar",
+                        confirmButtonClass: "btn-error"
+                    });
                 }
             });
         });
