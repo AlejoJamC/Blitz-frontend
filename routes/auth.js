@@ -22,12 +22,6 @@ authRoutes.get('/login', function (req, res) {
     if (typeof req.query.error !== 'undefined') {
         error = req.query.error;
     }
-    // Session
-    /*
-     if(typeof req.session.userId === 'undefined' || typeof req.session.userId === ''){
-     return res.redirect('/login');
-     }
-     */
 
     res.render('auth/signin', {
         title: 'Iniciar sesión | Blitz',
@@ -110,6 +104,7 @@ authRoutes.post('/login/ajax', function (req, res) {
             var objBody = JSON.parse(body);
             req.session.userId =  objBody.data._id;
             req.session.userEmail = email;
+            req.session.userType = 'standard';
             req.session.compose = tokenCompose;
         }
 
