@@ -117,29 +117,31 @@ app.controller("ctrlAdmins", ["$scope", "$http", "SweetAlert", function($s, $htt
             showCancelButton: true,
             cancelButtonText: "No",
             closeOnCancel: true
-        }, function() {
-            var params = { id: $s.slAdmin._id };
-            $http({
-                method: "DELETE",
-                url: '/admins/ajax/' + $s.slAdmin._id
-            }).then(function success(res) {
-                var body = JSON.parse(res.data.body);
-                if (body.hasOwnProperty('errors')) {
-                    $SweetAlert.swal(body.name, body.message, "error");
-                } else {
-                    $SweetAlert.swal({ title: 'Administrador eliminado satisfactoriamente', text: body.message, type: 'success' }, function() {
-                        $s.admins = [];
-                        $s.getAdmins();
-                        $s.shHead = false;
-                        $s.slAdmin = {};
-                    }, "success");
-                }
-            }, function error(res) {
-                $s.shHead = false;
-                var data = res.data;
-                var body = JSON.parse(data.body);
-                $SweetAlert.swal('Error ' + data.statusCode, body.message, "error");
-            });
+        }, function(isConfirm) {
+            if(isConfirm){
+                var params = { id: $s.slAdmin._id };
+                $http({
+                    method: "DELETE",
+                    url: '/admins/ajax/' + $s.slAdmin._id
+                }).then(function success(res) {
+                    var body = JSON.parse(res.data.body);
+                    if (body.hasOwnProperty('errors')) {
+                        $SweetAlert.swal(body.name, body.message, "error");
+                    } else {
+                        $SweetAlert.swal({ title: 'Administrador eliminado satisfactoriamente', text: body.message, type: 'success' }, function() {
+                            $s.admins = [];
+                            $s.getAdmins();
+                            $s.shHead = false;
+                            $s.slAdmin = {};
+                        }, "success");
+                    }
+                }, function error(res) {
+                    $s.shHead = false;
+                    var data = res.data;
+                    var body = JSON.parse(data.body);
+                    $SweetAlert.swal('Error ' + data.statusCode, body.message, "error");
+                });
+            }
         });
     }
 }]);

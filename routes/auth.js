@@ -250,8 +250,6 @@ authRoutes.post('/forgot/ajax', function (req, res) {
 
     var token = process.env.API_AUTH;
 
-    logger.info(api + '/users');
-
     // Request options
     var options = {
         url: api + '/users',

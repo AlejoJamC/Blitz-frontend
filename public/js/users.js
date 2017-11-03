@@ -32,17 +32,17 @@ app.controller("ctrlUsers", ["$scope", "$http", "SweetAlert", function($s, $http
         $s.shHead = true;
         $s.slUser = angular.copy(user);
         $s.frmUser = { confPass: "" };
-    }
+    };
     $s.updateUser = function() {
         $s.update = true;
         $s.frmUser = angular.copy($s.slUser);
-    }
+    };
     $s.newUser = function() {
         $s.update = false;
         $s.add = true;
         $s.shHead = false;
         $s.frmUser = { confPass: "" };
-    }
+    };
     $s.saveOrUpdateUser = function() {
         var params = {
             firstName: $s.frmUser.firstName,
@@ -102,7 +102,7 @@ app.controller("ctrlUsers", ["$scope", "$http", "SweetAlert", function($s, $http
                 $SweetAlert.swal('Error ' + data.statusCode, body.message, "error");
             });
         }
-    }
+    };
     $s.deleteUser = function() {
         var username = ($s.slUser.firstName) ? $s.slUser.firstName + ' ' + $s.slUser.lastName : $s.slUser.email
         $SweetAlert.swal({
@@ -117,29 +117,31 @@ app.controller("ctrlUsers", ["$scope", "$http", "SweetAlert", function($s, $http
             showCancelButton: true,
             cancelButtonText: "No",
             closeOnCancel: true
-        }, function() {
-            var params = { id: $s.slUser._id };
-            $http({
-                method: "DELETE",
-                url: '/users/ajax/' + $s.slUser._id
-            }).then(function success(res) {
-                var body = JSON.parse(res.data.body);
-                if (body.hasOwnProperty('errors')) {
-                    $SweetAlert.swal(body.name, body.message, "error");
-                } else {
-                    $SweetAlert.swal({ title: 'Usuario eliminado satisfactoriamente', text: body.message, type: 'success' }, function() {
-                        $s.users = [];
-                        $s.getUsers();
-                        $s.shHead = false;
-                        $s.slUser = {};
-                    }, "success");
-                }
-            }, function error(res) {
-                $s.shHead = false;
-                var data = res.data;
-                var body = JSON.parse(data.body);
-                $SweetAlert.swal('Error ' + data.statusCode, body.message, "error");
-            });
+        }, function(isConfirm) {
+            if(isConfirm){
+                var params = { id: $s.slUser._id };
+                $http({
+                    method: "DELETE",
+                    url: '/users/ajax/' + $s.slUser._id
+                }).then(function success(res) {
+                    var body = JSON.parse(res.data.body);
+                    if (body.hasOwnProperty('errors')) {
+                        $SweetAlert.swal(body.name, body.message, "error");
+                    } else {
+                        $SweetAlert.swal({ title: 'Usuario eliminado satisfactoriamente', text: body.message, type: 'success' }, function() {
+                            $s.users = [];
+                            $s.getUsers();
+                            $s.shHead = false;
+                            $s.slUser = {};
+                        }, "success");
+                    }
+                }, function error(res) {
+                    $s.shHead = false;
+                    var data = res.data;
+                    var body = JSON.parse(data.body);
+                    $SweetAlert.swal('Error ' + data.statusCode, body.message, "error");
+                });
+            }
         });
     }
 }]);

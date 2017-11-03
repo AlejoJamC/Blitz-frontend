@@ -65,13 +65,11 @@ contentRouter.get('/content/ajax', function (req, res) {
     request.get(options, function (err, httpResponse, body) {
         // Request error
         if (err) {
-            logger.info('entro al error de request');
             logger.error(err);
             return res.status(500).send(err);
         }
 
         if (httpResponse.statusCode !== 200) {
-            logger.info(httpResponse.statusCode);
             switch (httpResponse.statusCode) {
                 case 400:
                     logger.error(err);
@@ -109,7 +107,6 @@ contentRouter.get('/content/ajax', function (req, res) {
         var objBody = body;
         if(typeof body === 'string' || body === '[]'){
             objBody = JSON.parse(body);
-            logger.info(objBody.length);
             if(objBody.length === 0){
                 objBody.rows = 0;
             }
@@ -155,13 +152,11 @@ contentRouter.get('/content/murmur/:id', function (req, res, next) {
     request.get(options, function (err, httpResponse, body) {
         // Request error
         if (err) {
-            logger.info('entro al error de request');
             logger.error(err);
             return res.status(500).send(err);
         }
 
         if (httpResponse.statusCode !== 200) {
-            logger.info(httpResponse.statusCode);
             switch (httpResponse.statusCode) {
                 case 400:
                     logger.error(err);
@@ -199,13 +194,10 @@ contentRouter.get('/content/murmur/:id', function (req, res, next) {
         var objBody = body;
         if(typeof body === 'string' || body === '[]'){
             objBody = JSON.parse(body);
-            logger.info(objBody.length);
             if(objBody.length === 0){
                 objBody.rows = 0;
             }
         }
-
-        logger.info(body);
 
         res.render('content/detail', {
             title: 'Detalle de ',
