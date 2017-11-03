@@ -63,6 +63,12 @@
                             confirmButtonClass: "btn-error"
                         });
                 }
+            }).error(function (err) {
+                swal(
+                    'Oops...',
+                    'Error al tratar de autenticar este usuario!',
+                    'error'
+                );
             });
         });
     }
