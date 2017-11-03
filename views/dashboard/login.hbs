@@ -1,43 +1,47 @@
 {{#contentFor 'pageStyles'}}
     <link rel="stylesheet" href="{{level}}vendor/sweetalert/dist/sweetalert.css">
+    <link rel="stylesheet" href="{{level}}css/blitz.css">
 {{/contentFor}}
 
 <div class="session-content">
-    <div class="card card-block form-layout">
+    <div class="card card-block form-layout {{#if isDashboard}} dark-body {{/if}}">
         <form role="form" action="/dashboard/login" id="frmlogin">
             <div class="text-xs-center m-b-3">
                 <img src="{{level}}img/logo.jpg" height="80" alt="" class="m-b-1"/>
-                <h5>
-                    Bienvenidos al proyecto Blitz.
+                <h5 style="{{#if isDashboard}} color: #b3b3b3;{{/if}}">
+                    Area de administración del proyecto Blitz.
                 </h5>
                 <p class="text-muted">
                     Por favor inicie sesión para continuar.
                 </p>
             </div>
             <fieldset class="form-group">
-                <label for="username">
+                <label style="{{#if isDashboard}} color: #b3b3b3;{{/if}}" for="username">
                     Email
                 </label>
-                <input type="text" class="form-control form-control-lg" id="email" placeholder="email@myemail.com" required/>
+                <input type="text" class="form-control form-control-lg" id="email" placeholder="email@myemail.com"
+                       required/>
             </fieldset>
             <fieldset class="form-group">
-                <label for="password">
+                <label style="{{#if isDashboard}} color: #b3b3b3;{{/if}}" for="password">
                     Contraseña
                 </label>
                 <input type="password" class="form-control form-control-lg" id="password" placeholder="********"
                        required/>
             </fieldset>
-            <label class="custom-control custom-checkbox m-b-1">
-                <input type="checkbox" class="custom-control-input">
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">Recordar mis datos</span>
-            </label>
             <button class="btn btn-primary btn-block btn-lg" type="submit">
                 Iniciar sesión
             </button>
         </form>
     </div>
 </div>
+<footer class="text-xs-center p-y-1">
+    <p>
+        <a href="/login">
+            Iniciar sesión como usuario
+        </a>
+    </p>
+</footer>
 
 {{#contentFor 'pageScripts'}}
     <script src="{{level}}vendor/sweetalert/dist/sweetalert.min.js"></script>
