@@ -22,7 +22,7 @@
                     </a>
                     <a class="column-equal" data-toggle="contact" ng-repeat="admin in admins | filter:search as results" ng-click="showAdmin(admin)">
                         <div class="col v-align-middle contact-avatar">
-                            <div class="circle-icon bg-danger">{[{(admin.firstName)?admin.firstName:admin.email|firstLetter}]}</div>
+                            <div class="circle-icon {[{ (admin.status) ? 'bg-success' : 'bg-danger' }]}">{[{(admin.firstName)?admin.firstName:admin.email|firstLetter}]}</div>
                         </div>
                         <div class="col v-align-middle contact-details p-l-1">
                             <span class="bold" ng-if="admin.firstName&&admin.lastName">{[{admin.firstName}]} {[{admin.lastName}]}</span>
@@ -42,7 +42,6 @@
                         </div>
                         <div class="col v-align-middle p-l-2">
                             <h1>
-                                <b>{[{slAdmin.firstName}]}</b> {[{slAdmin.lastName}]}
                                 <h3>{[{slAdmin.email}]}</h3>
                                  <button class="btn btn-icon-icon btn-sm btn-primary" ng-click="updateAdmin()" ng-hide="add">
                                     <i class="fa fa-edit">
@@ -58,18 +57,6 @@
                     <div class="column-equal m-b-2" ng-show="(update||add)">
                         <h3 ng-show="add">Crear usuario</h3>
                         <form name="frm_Admin" ng-submit="saveOrUpdateAdmin()" novalidate>
-                            <fieldset class="form-group">
-                                <label for="txtFirstName">
-                                    Nombres
-                                </label>
-                                <input type="text" class="form-control" name="txtFirstName" id="txtFirstName" placeholder="Mi(s) Nombre(s)" ng-model="frmAdmin.firstName" />
-                            </fieldset>
-                            <fieldset class="form-group">
-                                <label for="txtLastName">
-                                    Apellidos
-                                </label>
-                                <input type="text" class="form-control" name="txtLastName" id="txtLastName" placeholder="Mi(s) Apellidos(s)" ng-model="frmAdmin.lastName" />
-                            </fieldset>
                             <fieldset class="form-group" ng-show="add">
                                 <label for="txtEmail">
                                     Email*

@@ -22,7 +22,7 @@
                     </a>
                     <a class="column-equal" data-toggle="contact" ng-repeat="user in users | filter:search as results" ng-click="showUser(user)">
                         <div class="col v-align-middle contact-avatar">
-                            <div class="circle-icon bg-danger">{[{(user.firstName)?user.firstName:user.email|firstLetter}]}</div>
+                            <div class="circle-icon {[{ (user.status) ? 'bg-success' : 'bg-danger' }]}">{[{(user.firstName)?user.firstName:user.email|firstLetter}]}</div>
                         </div>
                         <div class="col v-align-middle contact-details p-l-1">
                             <span class="bold" ng-if="user.firstName&&user.lastName">{[{user.firstName}]} {[{user.lastName}]}</span>
