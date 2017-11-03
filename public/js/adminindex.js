@@ -23,7 +23,7 @@
         }).done(function (data) {
             var response = JSON.parse(data);
             $('#adminCount').text(response.admins);
-            $('#userCount').text(response.murmurs);
+            $('#userCount').text(response.users);
             $('#connCount').text(response.connections);
             $('#murmurCount').text(response.murmurs);
             $('#unmurmurCount').text(response.unmurmurs);
