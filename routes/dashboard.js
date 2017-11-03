@@ -15,7 +15,7 @@ var dashboardRoutes = express.Router();
 var logger = require('../utils/logger').logger;
 
 /* GET Index page. */
-dashboardRoutes.get('/dashboard', function(req, res) {
+dashboardRoutes.get('/dashboard', function (req, res) {
     // Basic error validator
     var error = '';
     // Error
@@ -36,24 +36,7 @@ dashboardRoutes.get('/dashboard', function(req, res) {
         level: '',
         isHome: true,
         layout: 'dashboard',
-        error: error
-    });
-});
-
-/* GET Admin Login page. */
-dashboardRoutes.get('/dashboard/login', function (req, res) {
-    // Basic error validator
-    var error = '';
-    // Error
-    if (typeof req.query.error !== 'undefined') {
-        error = req.query.error;
-    }
-
-    res.render('dashboard/login', {
-        title: 'Iniciar sesión como administrador | Blitz',
-        level: '../',
-        isHome: true,
-        layout: 'auth',
+        userProfile: req.session.userFull,
         error: error
     });
 });
@@ -70,7 +53,7 @@ dashboardRoutes.get('/dashboard/users', function(req, res) {
     if (typeof req.session.userId === 'undefined' || typeof req.session.userId === ''
         || typeof req.session.userType === 'undefined') {
         return res.redirect('/login');
-    }else if(req.session.userType !== 'adminblitz'){
+    } else if (req.session.userType !== 'adminblitz') {
         return res.redirect('/content');
     }
 
@@ -78,13 +61,14 @@ dashboardRoutes.get('/dashboard/users', function(req, res) {
         title: 'Usuarios | Administración | Blitz',
         level: '../../',
         isHome: true,
+        userProfile: req.session.userFull,
         layout: 'dashboard',
         error: error
     });
 });
 
 /* GET Admin list page. */
-dashboardRoutes.get('/dashboard/admins', function(req, res) {
+dashboardRoutes.get('/dashboard/admins', function (req, res) {
     // Basic error validator
     var error = '';
     // Error
@@ -95,7 +79,7 @@ dashboardRoutes.get('/dashboard/admins', function(req, res) {
     if (typeof req.session.userId === 'undefined' || typeof req.session.userId === ''
         || typeof req.session.userType === 'undefined') {
         return res.redirect('/login');
-    }else if(req.session.userType !== 'adminblitz'){
+    } else if (req.session.userType !== 'adminblitz') {
         return res.redirect('/content');
     }
 
@@ -103,13 +87,14 @@ dashboardRoutes.get('/dashboard/admins', function(req, res) {
         title: 'Administradores | Administración | Blitz',
         level: '../../',
         isHome: true,
+        userProfile: req.session.userFull,
         layout: 'dashboard',
         error: error
     });
 });
 
 /* GET Murmur list page. */
-dashboardRoutes.get('/dashboard/murmurs', function(req, res) {
+dashboardRoutes.get('/dashboard/murmurs', function (req, res) {
     // Basic error validator
     var error = '';
     // Error
@@ -120,7 +105,7 @@ dashboardRoutes.get('/dashboard/murmurs', function(req, res) {
     if (typeof req.session.userId === 'undefined' || typeof req.session.userId === ''
         || typeof req.session.userType === 'undefined') {
         return res.redirect('/login');
-    }else if(req.session.userType !== 'adminblitz'){
+    } else if (req.session.userType !== 'adminblitz') {
         return res.redirect('/content');
     }
 
@@ -128,13 +113,33 @@ dashboardRoutes.get('/dashboard/murmurs', function(req, res) {
         title: 'Soplos cardíacos | Administración | Blitz',
         level: '../../',
         isHome: true,
+        userProfile: req.session.userFull,
         layout: 'dashboard',
         error: error
     });
 });
 
+/* GET Admin Login page. */
+dashboardRoutes.get('/dashboard/login', function (req, res) {
+    // Basic error validator
+    var error = '';
+    // Error
+    if (typeof req.query.error !== 'undefined') {
+        error = req.query.error;
+    }
+
+    res.render('dashboard/login', {
+        title: 'Iniciar sesión como administrador | Blitz',
+        level: '../',
+        isDashboard: true,
+        userProfile: req.session.userFull,
+        layout: 'auth',
+        error: error
+    });
+});
+
 /* GET users list. */
-dashboardRoutes.get('/users/ajax', function(req, res) {
+dashboardRoutes.get('/users/ajax', function (req, res) {
     // Basic error validator
     var error = '';
     // Error
@@ -152,8 +157,6 @@ dashboardRoutes.get('/users/ajax', function(req, res) {
 
     var token = process.env.API_AUTH;
 
-    logger.info(api + '/users');
-
     // Request options
     var options = {
         url: api + '/users',
@@ -164,7 +167,7 @@ dashboardRoutes.get('/users/ajax', function(req, res) {
         method: 'GET'
     };
 
-    request.get(options, function(err, httpResponse, body) {
+    request.get(options, function (err, httpResponse, body) {
         // Request error
         if (err) {
             logger.error(err);
@@ -231,8 +234,6 @@ dashboardRoutes.put('/users/ajax', function(req, res) {
 
     var token = process.env.API_AUTH;
 
-    logger.info(api + '/users' + req.body.id);
-
     // Request options
     var options = {
         url: api + '/users/' + req.body.id,
@@ -249,7 +250,7 @@ dashboardRoutes.put('/users/ajax', function(req, res) {
         }
     };
 
-    request.put(options, function(err, httpResponse, body) {
+    request.put(options, function (err, httpResponse, body) {
         // Request error
         if (err) {
             logger.error(err);
@@ -317,8 +318,6 @@ dashboardRoutes.post('/users/ajax', function(req, res) {
 
     var token = process.env.API_AUTH;
 
-    logger.info(api + '/users');
-
     // Request options
     var options = {
         url: api + '/users/',
@@ -336,7 +335,7 @@ dashboardRoutes.post('/users/ajax', function(req, res) {
         }
     };
 
-    request.post(options, function(err, httpResponse, body) {
+    request.post(options, function (err, httpResponse, body) {
         // Request error
         if (err) {
             logger.error(err);
@@ -398,8 +397,6 @@ dashboardRoutes.delete('/users/ajax/:id', function(req, res) {
 
     var token = process.env.API_AUTH;
 
-    logger.info(api + '/users' + req.params.id);
-
     // Request options
     var options = {
         url: api + '/users/' + req.params.id,
@@ -410,7 +407,7 @@ dashboardRoutes.delete('/users/ajax/:id', function(req, res) {
         method: 'DELETE'
     };
 
-    request.delete(options, function(err, httpResponse, body) {
+    request.delete(options, function (err, httpResponse, body) {
         // Request error
         if (err) {
             logger.error(err);
@@ -455,7 +452,7 @@ dashboardRoutes.delete('/users/ajax/:id', function(req, res) {
 });
 
 /* GET admins list. */
-dashboardRoutes.get('/admins/ajax', function(req, res) {
+dashboardRoutes.get('/admins/ajax', function (req, res) {
     // Basic error validator
     var error = '';
     // Error
@@ -472,8 +469,6 @@ dashboardRoutes.get('/admins/ajax', function(req, res) {
 
     var token = process.env.API_AUTH;
 
-    logger.info(api + '/admins');
-
     // Request options
     var options = {
         url: api + '/admin',
@@ -484,7 +479,7 @@ dashboardRoutes.get('/admins/ajax', function(req, res) {
         method: 'GET'
     };
 
-    request.get(options, function(err, httpResponse, body) {
+    request.get(options, function (err, httpResponse, body) {
         // Request error
         if (err) {
             logger.error(err);
@@ -529,7 +524,7 @@ dashboardRoutes.get('/admins/ajax', function(req, res) {
 });
 
 /* PUT user. */
-dashboardRoutes.put('/admins/ajax', function(req, res) {
+dashboardRoutes.put('/admins/ajax', function (req, res) {
     // Basic error validator
     var error = '';
     // Error
@@ -569,7 +564,7 @@ dashboardRoutes.put('/admins/ajax', function(req, res) {
         }
     };
 
-    request.put(options, function(err, httpResponse, body) {
+    request.put(options, function (err, httpResponse, body) {
         // Request error
         if (err) {
             logger.error(err);
@@ -614,7 +609,7 @@ dashboardRoutes.put('/admins/ajax', function(req, res) {
 });
 
 /* POST user. */
-dashboardRoutes.post('/admins/ajax', function(req, res) {
+dashboardRoutes.post('/admins/ajax', function (req, res) {
     // Basic error validator
     var error = '';
     // Error
@@ -656,7 +651,7 @@ dashboardRoutes.post('/admins/ajax', function(req, res) {
         }
     };
 
-    request.post(options, function(err, httpResponse, body) {
+    request.post(options, function (err, httpResponse, body) {
         // Request error
         if (err) {
             logger.error(err);
@@ -701,7 +696,7 @@ dashboardRoutes.post('/admins/ajax', function(req, res) {
 });
 
 /* DELETE user. */
-dashboardRoutes.delete('/admins/ajax/:id', function(req, res) {
+dashboardRoutes.delete('/admins/ajax/:id', function (req, res) {
     // Basic error validator
     var error = '';
     // Error
@@ -730,7 +725,7 @@ dashboardRoutes.delete('/admins/ajax/:id', function(req, res) {
         method: 'DELETE'
     };
 
-    request.delete(options, function(err, httpResponse, body) {
+    request.delete(options, function (err, httpResponse, body) {
         // Request error
         if (err) {
             logger.error(err);
@@ -804,7 +799,7 @@ dashboardRoutes.post('/dashboard/login/ajax', function (req, res) {
 
     request.get(options, function (err, httpResponse, body) {
         // Request error
-        if(err){
+        if (err) {
             logger.error(err);
             return res.status(500).send(err);
         }
@@ -842,15 +837,88 @@ dashboardRoutes.post('/dashboard/login/ajax', function (req, res) {
             }
         }
 
-        if(httpResponse.statusCode === 200){
+        if (httpResponse.statusCode === 200) {
             var objBody = JSON.parse(body);
-            req.session.userId =  objBody.data._id;
+            req.session.userId = objBody.data._id;
             req.session.userEmail = email;
+            req.session.userFull = objBody.data;
             req.session.userType = 'adminblitz';
             req.session.compose = tokenCompose;
         }
 
         return res.send(httpResponse);
+    });
+});
+
+/* GET admins entities count. */
+dashboardRoutes.get('/dashboard/entities/ajax', function (req, res) {
+    // Basic error validator
+    var error = '';
+    // Error
+    if (typeof req.query.error !== 'undefined') {
+        error = req.query.error;
+    }
+    // Session
+    /*if (typeof req.session.userId === 'undefined' || typeof req.session.userId === '') {
+        return res.redirect('/login');
+    }*/
+
+    var api = process.env.API_URL + (process.env.API_PORT !== '' ? ':' + process.env.API_PORT : '') +
+        (process.env.API_VERSION !== '' ? '/' + process.env.API_VERSION : '');
+
+    var token = process.env.API_AUTH;
+
+    // Request options
+    var options = {
+        url: api + '/admin/entities/count',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json'
+        },
+        method: 'GET'
+    };
+
+    request.get(options, function (err, httpResponse, body) {
+        // Request error
+        if (err) {
+            logger.error(err);
+            return res.status(500).send(err);
+        }
+
+        if (httpResponse.statusCode !== 200) {
+            switch (httpResponse.statusCode) {
+                case 400:
+                    logger.error(err);
+                    return res.status(400).send({
+                        message: '	Invalid Request Body, could not be parsed as JSON | Blitz Server',
+                        error: body.errors
+                    });
+                    break;
+                case 401:
+                    logger.error(err);
+                    return res.status(401).send({
+                        message: 'Unauthorized | Blitz Server',
+                        error: body
+                    });
+                    break;
+                case 422:
+                    logger.error(err);
+                    return res.status(422).send({
+                        message: 'Unprocessable Entity; there are errors in one or more of the fields provided in the request body | Blitz Server',
+                        error: body.errors
+                    });
+                    break;
+                default:
+                    logger.error(err);
+                    return res.status(500).send({
+                        message: '	Server error - contact your administrator',
+                        error: body.errors
+                    });
+                    break;
+            }
+        }
+
+        return res.send(body);
     });
 });
 
