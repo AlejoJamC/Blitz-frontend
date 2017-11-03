@@ -15,7 +15,7 @@ app.controller("ctrlAdmins", ["$scope", "$http", "SweetAlert", function($s, $htt
             url: '/admins/ajax'
         }).then(function success(res) {
             var data = res.data;
-            if (data.statusCode == 200) {
+            if (data.statusCode === 200) {
                 $s.admins = JSON.parse(data.body)
             }
         }, function error(res) {
@@ -32,17 +32,17 @@ app.controller("ctrlAdmins", ["$scope", "$http", "SweetAlert", function($s, $htt
         $s.shHead = true;
         $s.slAdmin = angular.copy(admin);
         $s.frmAdmin = { confPass: "" };
-    }
+    };
     $s.updateAdmin = function() {
         $s.update = true;
         $s.frmAdmin = angular.copy($s.slAdmin);
-    }
+    };
     $s.newAdmin = function() {
         $s.update = false;
         $s.add = true;
         $s.shHead = false;
         $s.frmAdmin = { confPass: "" };
-    }
+    };
     $s.saveOrUpdateAdmin = function() {
         var params = {
             firstName: $s.frmAdmin.firstName,
@@ -102,7 +102,7 @@ app.controller("ctrlAdmins", ["$scope", "$http", "SweetAlert", function($s, $htt
                 $SweetAlert.swal('Error ' + data.statusCode, body.message, "error");
             });
         }
-    }
+    };
     $s.deleteAdmin = function() {
         var username = ($s.slAdmin.firstName) ? $s.slAdmin.firstName + ' ' + $s.slAdmin.lastName : $s.slAdmin.email
         $SweetAlert.swal({
@@ -145,7 +145,7 @@ app.controller("ctrlAdmins", ["$scope", "$http", "SweetAlert", function($s, $htt
 }]);
 app.filter('firstLetter', function() {
     return function(text) {
-        if (text != null) {
+        if (text !== null) {
             return text.substring(0, 1);
         }
     }

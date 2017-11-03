@@ -17,3 +17,7 @@
 .ng-invalid {
     border-color: red;
 }
+
+.dark-body{
+    background-color: #2D3E50; !important;
+}
