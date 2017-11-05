@@ -1,4 +1,5 @@
 {{#contentFor 'pageStyles'}}
+    <link rel="stylesheet" href="{{level}}vendor/sweetalert/dist/sweetalert.css">
 {{/contentFor}}
 
 <div class="session-content">
@@ -21,9 +22,12 @@
                 </div>
                 <fieldset class="form-group">
                     <label for="password">
-                        Email
+                        Nueva contraseña
                     </label>
-                    <input type="email" class="form-control form-control-lg" id="email" placeholder="recovery@myemail.com"
+                    <input type="hidden" id="codereset" value="{{{codeReset}}}"/>
+                    <input type="hidden" id="emailreset" value="{{{emailReset}}}"/>
+                    <input type="password" class="form-control form-control-lg" id="passwordreset"
+                           placeholder="New password"
                            autofocus required/>
                 </fieldset>
                 <button class="btn btn-primary btn-block btn-lg" type="submit">
@@ -46,4 +50,7 @@
 </footer>
 
 {{#contentFor 'pageScripts'}}
+    <script src="{{level}}vendor/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="{{level}}vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="{{level}}js/reset.js"></script>
 {{/contentFor}}
