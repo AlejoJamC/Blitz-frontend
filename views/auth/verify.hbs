@@ -1,0 +1,42 @@
+{{#contentFor 'pageStyles'}}
+{{/contentFor}}
+
+<div class="session-content">
+    <div class="card card-block form-layout">
+        {{#if emptyValues}}
+            <div class="text-md-center m-b-3">
+                <i class="material-icons" style="color: red; font-size: 100px;">error</i>
+                <h1>Este enlace no esta disponible. :/</h1>
+            </div>
+        {{else}}
+            <form role="form" id="frmlogin">
+                <div class="text-xs-center m-b-3">
+                    <img src="{{level}}img/logo.jpg" height="80" alt="" class="m-b-1"/>
+                    <h5>
+                        Correo veficiado exitosamente.
+                    </h5>
+                    <p class="text-muted">
+                        Ya puede continuar al inicio de sesión.
+                    </p>
+                </div>
+            </form>
+            <a href="/login" class="btn btn-primary btn-block btn-lg" type="button">
+                Iniciar sesión ahora
+            </a>
+        {{/if}}
+    </div>
+</div>
+<footer class="text-xs-center p-y-1">
+    <p>
+        <a href="/">
+            Inicio
+        </a>
+        &nbsp;&nbsp;·&nbsp;&nbsp;
+        <a href="/forgot">
+            ¿Olvidaste tu contraseña?
+        </a>
+    </p>
+</footer>
+
+{{#contentFor 'pageScripts'}}
+{{/contentFor}}

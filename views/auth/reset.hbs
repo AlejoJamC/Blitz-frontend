@@ -1,0 +1,49 @@
+{{#contentFor 'pageStyles'}}
+{{/contentFor}}
+
+<div class="session-content">
+    <div class="card card-block form-layout">
+        {{#if emptyValues}}
+            <div class="text-md-center m-b-3">
+                <i class="material-icons" style="color: red; font-size: 100px;">error</i>
+                <h1>Este enlace no esta disponible. :/</h1>
+            </div>
+        {{else}}
+            <form role="form" action="/forgot" id="validate">
+                <div class="text-xs-left m-b-3">
+                    <img src="{{level}}img/logo.jpg" height="80" alt="" class="m-b-1"/>
+                    <h5>
+                        Nueva contraseña
+                    </h5>
+                    <p class="text-muted">
+                        Ingrese la nueva contraseña que va ser asignada al usuario: {{emailReset}}
+                    </p>
+                </div>
+                <fieldset class="form-group">
+                    <label for="password">
+                        Email
+                    </label>
+                    <input type="email" class="form-control form-control-lg" id="email" placeholder="recovery@myemail.com"
+                           autofocus required/>
+                </fieldset>
+                <button class="btn btn-primary btn-block btn-lg" type="submit">
+                    Solicitar
+                </button>
+            </form>
+        {{/if}}
+    </div>
+</div>
+<footer class="text-xs-center p-y-1">
+    <p>
+        <a href="/">
+            Inicio
+        </a>
+        &nbsp;&nbsp;·&nbsp;&nbsp;
+        <a href="/forgot">
+            ¿Olvidaste tu contraseña?
+        </a>
+    </p>
+</footer>
+
+{{#contentFor 'pageScripts'}}
+{{/contentFor}}
