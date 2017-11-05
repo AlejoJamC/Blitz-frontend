@@ -62,7 +62,7 @@ authRoutes.post('/login/ajax', function (req, res) {
 
     request.get(options, function (err, httpResponse, body) {
         // Request error
-        if(err){
+        if (err) {
             logger.error(err);
             return res.status(500).send(err);
         }
@@ -100,9 +100,9 @@ authRoutes.post('/login/ajax', function (req, res) {
             }
         }
 
-        if(httpResponse.statusCode === 200){
+        if (httpResponse.statusCode === 200) {
             var objBody = JSON.parse(body);
-            req.session.userId =  objBody.data._id;
+            req.session.userId = objBody.data._id;
             req.session.userEmail = email;
             req.session.userType = 'standard';
             req.session.compose = tokenCompose;
@@ -162,17 +162,17 @@ authRoutes.post('/signup/ajax', function (req, res) {
             'Content-Type': 'application/json'
         },
         method: 'POST',
-        json:{
-            'firstName' : firstname,
-            'lastName' : lastname,
-            'email' : email,
-            'password' : password
+        json: {
+            'firstName': firstname,
+            'lastName': lastname,
+            'email': email,
+            'password': password
         }
     };
 
     request.post(options, function (err, httpResponse, body) {
         // Request error
-        if(err){
+        if (err) {
             logger.error(err);
             return res.status(500).send(err);
         }
@@ -242,17 +242,18 @@ authRoutes.get('/forgot/reset', function (req, res) {
 
     //query params
     var emptyValues = false;
-    var email= req.query.email;
+    var email = req.query.email;
     var code = req.query.c;
     var random1 = req.query.active;
     var random2 = req.query.alter;
 
-    if(typeof email === 'undefined' || typeof code === 'undefined' || typeof random1 === 'undefined' || typeof random2 === 'undefined'){
+    if (typeof email === 'undefined' || typeof code === 'undefined' || typeof random1 === 'undefined' || typeof random2 === 'undefined') {
         emptyValues = true;
     }
 
-    if(emptyValues){
-        return res.render('auth/verify', {
+    if (emptyValues) {
+        logger.info('retorno por valores');
+        return res.render('auth/reset', {
             title: 'Recuperar contraseña | Blitz',
             level: '../../',
             isHome: true,
@@ -270,29 +271,24 @@ authRoutes.get('/forgot/reset', function (req, res) {
 
     // Request options
     var options = {
-        url: api + '/activations/codes/' + code,
+        url: api + '/password/confirmation/' + code + '/' + email,
         headers: {
             'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
         },
-        method: 'PATCH',
-        json: {
-            'email': email
-        }
+        method: 'GET'
     };
 
-    request.patch(options, function (err, httpResponse, body) {
+    request.get(options, function (err, httpResponse, body) {
         // Request error
         if (err) {
             logger.error(err);
             return res.status(500).send(err);
         }
 
-        logger.info(httpResponse.statusCode);
-
         if (httpResponse.statusCode === 422 || httpResponse.statusCode !== 200) {
             emptyValues = true;
-            return res.render('auth/verify', {
+            return res.render('auth/reset', {
                 title: 'Verificar correo electronico | Blitz',
                 level: '../../',
                 isHome: true,
@@ -302,11 +298,13 @@ authRoutes.get('/forgot/reset', function (req, res) {
             });
         }
 
-        return res.render('auth/verify', {
+        return res.render('auth/reset', {
             title: 'Verificar correo electronico | Blitz',
             level: '../../',
             isHome: true,
             emptyValues: emptyValues,
+            codeReset: code,
+            emailReset: email,
             layout: 'auth',
             error: error
         });
@@ -337,14 +335,14 @@ authRoutes.post('/forgot/ajax', function (req, res) {
             'Content-Type': 'application/json'
         },
         method: 'POST',
-        json:{
-            'email' : email
+        json: {
+            'email': email
         }
     };
 
     request.post(options, function (err, httpResponse, body) {
         // Request error
-        if(err){
+        if (err) {
             logger.error(err);
             return res.status(500).send(err);
         }
@@ -383,7 +381,84 @@ authRoutes.post('/forgot/ajax', function (req, res) {
         }
 
         // succes
-        logger.info('Ajax response /forgot/ajax');
+        return res.send(httpResponse);
+    });
+});
+
+/* POST Reset page. */
+authRoutes.post('/reset/ajax', function (req, res) {
+    // Basic error validator
+    var error = '';
+    // Error
+    if (typeof req.query.error !== 'undefined') {
+        error = req.query.error;
+    }
+
+    var email = req.body.email;
+    var code = req.body.code;
+    var password = req.body.password;
+
+    var api = process.env.API_URL + (process.env.API_PORT !== '' ? ':' + process.env.API_PORT : '')
+        + (process.env.API_VERSION !== '' ? '/' + process.env.API_VERSION : '');
+
+    var token = process.env.API_AUTH;
+
+    // Request options
+    var options = {
+        url: api + '/password/reset/' + code,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json'
+        },
+        method: 'PATCH',
+        json: {
+            'email': email,
+            'password': password,
+            'code': code
+        }
+    };
+
+    request.patch(options, function (err, httpResponse, body) {
+        // Request error
+        if (err) {
+            logger.error(err);
+            return res.status(500).send(err);
+        }
+
+        if (httpResponse.statusCode !== 200) {
+            switch (httpResponse.statusCode) {
+                case 400:
+                    logger.error(err);
+                    return res.status(400).send({
+                        message: '	Invalid Request Body, could not be parsed as JSON | Blitz Server',
+                        error: body.errors
+                    });
+                    break;
+                case 401:
+                    logger.error(err);
+                    return res.status(401).send({
+                        message: 'Unauthorized | Blitz Server',
+                        error: body
+                    });
+                    break;
+                case 422:
+                    logger.error(err);
+                    return res.status(422).send({
+                        message: 'Unprocessable Entity; there are errors in one or more of the fields provided in the request body | Blitz Server',
+                        error: body.errors
+                    });
+                    break;
+                default:
+                    logger.error(err);
+                    return res.status(500).send({
+                        message: '	Server error - contact your administrator',
+                        error: body.errors
+                    });
+                    break;
+            }
+        }
+
+        // succes
         return res.send(httpResponse);
     });
 });
@@ -410,16 +485,16 @@ authRoutes.get('/login/verify', function (req, res) {
 
     //query params
     var emptyValues = false;
-    var email= req.query.email;
+    var email = req.query.email;
     var code = req.query.c;
     var random1 = req.query.active;
     var random2 = req.query.alter;
 
-    if(typeof email === 'undefined' || typeof code === 'undefined' || typeof random1 === 'undefined' || typeof random2 === 'undefined'){
+    if (typeof email === 'undefined' || typeof code === 'undefined' || typeof random1 === 'undefined' || typeof random2 === 'undefined') {
         emptyValues = true;
     }
 
-    if(emptyValues){
+    if (emptyValues) {
         return res.render('auth/verify', {
             title: 'Verificar correo electronico | Blitz',
             level: '../../',
