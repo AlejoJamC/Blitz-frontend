@@ -231,6 +231,88 @@ authRoutes.get('/forgot', function (req, res) {
     });
 });
 
+/* GET Login page. */
+authRoutes.get('/forgot/reset', function (req, res) {
+    // Basic error validator
+    var error = '';
+    // Error
+    if (typeof req.query.error !== 'undefined') {
+        error = req.query.error;
+    }
+
+    //query params
+    var emptyValues = false;
+    var email= req.query.email;
+    var code = req.query.c;
+    var random1 = req.query.active;
+    var random2 = req.query.alter;
+
+    if(typeof email === 'undefined' || typeof code === 'undefined' || typeof random1 === 'undefined' || typeof random2 === 'undefined'){
+        emptyValues = true;
+    }
+
+    if(emptyValues){
+        return res.render('auth/verify', {
+            title: 'Recuperar contraseña | Blitz',
+            level: '../../',
+            isHome: true,
+            emptyValues: emptyValues,
+            layout: 'auth',
+            error: error
+        });
+    }
+
+    // Activate the user
+    var api = process.env.API_URL + (process.env.API_PORT !== '' ? ':' + process.env.API_PORT : '') +
+        (process.env.API_VERSION !== '' ? '/' + process.env.API_VERSION : '');
+
+    var token = process.env.API_AUTH;
+
+    // Request options
+    var options = {
+        url: api + '/activations/codes/' + code,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json'
+        },
+        method: 'PATCH',
+        json: {
+            'email': email
+        }
+    };
+
+    request.patch(options, function (err, httpResponse, body) {
+        // Request error
+        if (err) {
+            logger.error(err);
+            return res.status(500).send(err);
+        }
+
+        logger.info(httpResponse.statusCode);
+
+        if (httpResponse.statusCode === 422 || httpResponse.statusCode !== 200) {
+            emptyValues = true;
+            return res.render('auth/verify', {
+                title: 'Verificar correo electronico | Blitz',
+                level: '../../',
+                isHome: true,
+                emptyValues: emptyValues,
+                layout: 'auth',
+                error: error
+            });
+        }
+
+        return res.render('auth/verify', {
+            title: 'Verificar correo electronico | Blitz',
+            level: '../../',
+            isHome: true,
+            emptyValues: emptyValues,
+            layout: 'auth',
+            error: error
+        });
+    });
+});
+
 /* POST Forgot page. */
 authRoutes.post('/forgot/ajax', function (req, res) {
     // Basic error validator
@@ -240,10 +322,7 @@ authRoutes.post('/forgot/ajax', function (req, res) {
         error = req.query.error;
     }
 
-    var firstname = req.body.firstname;
-    var lastname = req.body.lastname;
     var email = req.body.email;
-    var password = req.body.password;
 
     var api = process.env.API_URL + (process.env.API_PORT !== '' ? ':' + process.env.API_PORT : '')
         + (process.env.API_VERSION !== '' ? '/' + process.env.API_VERSION : '');
@@ -252,17 +331,14 @@ authRoutes.post('/forgot/ajax', function (req, res) {
 
     // Request options
     var options = {
-        url: api + '/users',
+        url: api + '/password/reset',
         headers: {
             'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
         },
         method: 'POST',
         json:{
-            'firstName' : firstname,
-            'lastName' : lastname,
-            'email' : email,
-            'password' : password
+            'email' : email
         }
     };
 
@@ -306,7 +382,9 @@ authRoutes.post('/forgot/ajax', function (req, res) {
             }
         }
 
-        return body;
+        // succes
+        logger.info('Ajax response /forgot/ajax');
+        return res.send(httpResponse);
     });
 });
 
@@ -321,5 +399,86 @@ authRoutes.get('/logout', function (req, res) {
     });
 });
 
+/* GET Login page. */
+authRoutes.get('/login/verify', function (req, res) {
+    // Basic error validator
+    var error = '';
+    // Error
+    if (typeof req.query.error !== 'undefined') {
+        error = req.query.error;
+    }
+
+    //query params
+    var emptyValues = false;
+    var email= req.query.email;
+    var code = req.query.c;
+    var random1 = req.query.active;
+    var random2 = req.query.alter;
+
+    if(typeof email === 'undefined' || typeof code === 'undefined' || typeof random1 === 'undefined' || typeof random2 === 'undefined'){
+        emptyValues = true;
+    }
+
+    if(emptyValues){
+        return res.render('auth/verify', {
+            title: 'Verificar correo electronico | Blitz',
+            level: '../../',
+            isHome: true,
+            emptyValues: emptyValues,
+            layout: 'auth',
+            error: error
+        });
+    }
+
+    // Activate the user
+    var api = process.env.API_URL + (process.env.API_PORT !== '' ? ':' + process.env.API_PORT : '') +
+        (process.env.API_VERSION !== '' ? '/' + process.env.API_VERSION : '');
+
+    var token = process.env.API_AUTH;
+
+    // Request options
+    var options = {
+        url: api + '/activations/codes/' + code,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json'
+        },
+        method: 'PATCH',
+        json: {
+            'email': email
+        }
+    };
+
+    request.patch(options, function (err, httpResponse, body) {
+        // Request error
+        if (err) {
+            logger.error(err);
+            return res.status(500).send(err);
+        }
+
+        logger.info(httpResponse.statusCode);
+
+        if (httpResponse.statusCode === 422 || httpResponse.statusCode !== 200) {
+            emptyValues = true;
+            return res.render('auth/verify', {
+                title: 'Verificar correo electronico | Blitz',
+                level: '../../',
+                isHome: true,
+                emptyValues: emptyValues,
+                layout: 'auth',
+                error: error
+            });
+        }
+
+        return res.render('auth/verify', {
+            title: 'Verificar correo electronico | Blitz',
+            level: '../../',
+            isHome: true,
+            emptyValues: emptyValues,
+            layout: 'auth',
+            error: error
+        });
+    });
+});
 
 module.exports = authRoutes;
