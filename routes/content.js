@@ -203,7 +203,7 @@ contentRouter.get('/content/murmur/:id', function (req, res, next) {
             title: 'Detalle de ',
             level: '../../',
             layout: 'content',
-            murmur: body,
+            murmur: JSON.parse(body),
             error: error
         });
     });
