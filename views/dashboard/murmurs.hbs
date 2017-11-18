@@ -17,7 +17,7 @@
                 <div class="flex-xs scroll-y">
                     <a class="column-equal">
                         <button type="button" class="btn btn-primary  btn-icon btn-block m-r-xs m-b-xs" ng-click="newMurmur()">
-                            <i class="material-icons">add</i> Usuario Nuevo
+                            <i class="material-icons">add</i> Soplo Nuevo
                         </button>
                     </a>
                     <a class="column-equal" data-toggle="contact" ng-repeat="murmur in murmurs | filter:search as results" ng-click="showMurmur(murmur)">
@@ -43,7 +43,7 @@
                         <div class="col v-align-middle p-l-2">
                             <h1>
                                 <b>{[{slMurmur.name}]}</b>
-                                <h3>{[{slMurmur.type}]} - {[{ (murmur.published) ? Publicado : Pendiente }]}</h3>
+                                <h3>{[{slMurmur.type}]} - {[{ (slMurmur.published) ? Publicado : Pendiente }]}</h3>
                                 <button class="btn btn-icon-icon btn-sm btn-primary" ng-click="updateMurmur()" ng-hide="add">
                                     <i class="fa fa-edit">
                                     </i>
@@ -56,57 +56,66 @@
                         </div>
                     </div>
                     <div class="column-equal m-b-2" ng-show="(update||add)">
-                        <h3 ng-show="add">Crear usuario</h3>
+                        <h3 ng-show="add">Crear Soplo</h3>
                         <form name="frm_Murmur" ng-submit="saveOrUpdateMurmur()" novalidate>
                             <fieldset class="form-group">
                                 <label for="txtFirstName">
-                                    Nombres
+                                    Nombre*
                                 </label>
-                                <input type="text" class="form-control" name="txtFirstName" id="txtFirstName" placeholder="Mi(s) Nombre(s)" ng-model="frmMurmur.firstName" />
+                                <input type="text" value="{[{slMurmur.name}]}" class="form-control" name="txtFirstName" id="txtFirstName"  ng-model="frmMurmur.firstName" />
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="txtLastName">
-                                    Apellidos
+                                    Titulo*
                                 </label>
-                                <input type="text" class="form-control" name="txtLastName" id="txtLastName" placeholder="Mi(s) Apellidos(s)" ng-model="frmMurmur.lastName" />
-                            </fieldset>
-                            <fieldset class="form-group" ng-show="add">
-                                <label for="txtEmail">
-                                    Email*
-                                </label>
-                                <input type="email" class="form-control" name="txtEmail" id="txtEmail" placeholder="email@myemail.com" ng-model="frmMurmur.email" ng-required="add"
-                                       ng-disabled="update"/>
-                                <div ng-messages="frm_Murmur.txtEmail.$error" role="alert">
-                                    <div ng-message="required">Campo requerido</div>
-                                    <div ng-message="email">Email invalido.</div>
-                                </div>
+                                <input type="text" value="{[{slMurmur.title}]}" class="form-control" name="txtLastName" id="txtLastName" ng-model="frmMurmur.lastName" />
                             </fieldset>
                             <fieldset class="form-group">
-                                <label for="txtPass">
-                                    Contraseña{[{add?'*':''}]} (al menos 8 caracteres)
+                                <label for="txtLastName">
+                                    Despcripcion*
                                 </label>
-                                <input type="password" class="form-control" name="txtPass" id="txtPass" placeholder="***********" ng-model="frmMurmur.pass" minlength="8" ng-required="add"/>
-                                <div ng-messages="frm_Murmur.txtPass.$error" role="alert">
-                                    <div ng-message="required">Campo requerido</div>
-                                    <div ng-message="minlength">Como m&iacute;nimo 8 caracteres.</div>
-                                </div>
+                                <input type="text" value="{[{slMurmur.description}]}" class="form-control" name="txtLastName" id="txtLastName" ng-model="frmMurmur.lastName" />
                             </fieldset>
                             <fieldset class="form-group">
-                                <label for="txtPassConf">
-                                    Confirmar{[{add?'*':''}]} Contraseña
+                                <label for="txtLastName">
+                                    URL*
                                 </label>
-                                <input type="password" class="form-control" name="txtPassConf" id="txtPassConf" placeholder="***********" ng-model="frmMurmur.confPass" compare-to="frmMurmur.pass"
-                                       minlength="8" ng-required="add"/>
-                                <div ng-messages="frm_Murmur.txtPassConf.$error" role="alert">
-                                    <div ng-message="required">Campo requerido</div>
-                                    <div ng-message="minlength">Como m&iacute;nimo 8 caracteres.</div>
-                                    <div ng-message="compareTo">Las Contraseñas no coinciden.</div>
-                                </div>
+                                <input type="text" value="{[{slMurmur.url}]}" class="form-control" name="txtLastName" id="txtLastName" ng-model="frmMurmur.lastName" />
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <label for="txtLastName">
+                                    Audio*
+                                </label>
+                                <input type="text" value="{[{slMurmur.audio}]}" class="form-control" name="txtLastName" id="txtLastName" ng-model="frmMurmur.lastName" />
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <label for="txtLastName">
+                                    Imagen*
+                                </label>
+                                <input type="text" value="{[{slMurmur.image}]}" class="form-control" name="txtLastName" id="txtLastName" ng-model="frmMurmur.lastName" />
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <label for="txtLastName">
+                                    Figura*
+                                </label>
+                                <input type="text" value="{[{slMurmur.figure}]}" class="form-control" name="txtLastName" id="txtLastName" ng-model="frmMurmur.lastName" />
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <label for="txtLastName">
+                                    FFT*
+                                </label>
+                                <input type="text" value="{[{slMurmur.fft}]}" class="form-control" name="txtLastName" id="txtLastName" ng-model="frmMurmur.lastName" />
                             </fieldset>
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" id="chkStatus" ng-model="frmMurmur.status"/>
+                                    <input type="checkbox" value="{[{slMurmur.status}]}" id="chkStatus" ng-model="frmMurmur.status"/>
                                     Estado
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="{[{slMurmur.published}]}" id="chkPublished" ng-model="frmMurmur.status"/>
+                                    publicado
                                 </label>
                             </div>
                             <button type="submit" class="btn btn-primary" ng-disabled="!frm_Murmur.$dirty||frm_Murmur.$invalid">
