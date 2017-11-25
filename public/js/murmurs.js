@@ -63,7 +63,7 @@ app.controller("ctrlMurmurs", ["$scope", "$http", "SweetAlert", function ($s, $h
                 } else {
                     $s.murmurs = [];
                     $SweetAlert.swal({
-                        title: 'Usuario actualizado satisfactoriamente',
+                        title: 'Soplo actualizado satisfactoriamente',
                         text: body.message,
                         type: 'success'
                     }, function () {
@@ -93,7 +93,7 @@ app.controller("ctrlMurmurs", ["$scope", "$http", "SweetAlert", function ($s, $h
                 } else {
                     $s.murmurs = [];
                     $SweetAlert.swal({
-                        title: 'Usuario creado satisfactoriamente',
+                        title: 'Soplo creado satisfactoriamente',
                         text: body.message,
                         type: 'success'
                     }, function () {
@@ -114,8 +114,8 @@ app.controller("ctrlMurmurs", ["$scope", "$http", "SweetAlert", function ($s, $h
     $s.deleteMurmur = function () {
         var murmurname = ($s.slMurmur.firstName) ? $s.slMurmur.firstName + ' ' + $s.slMurmur.lastName : $s.slMurmur.email
         $SweetAlert.swal({
-            title: 'Eliminar Usuario',
-            text: '¿Est&aacute; seguro que desea eliminar el usuario <b>' + murmurname + '</b>?',
+            title: 'Eliminar Soplo',
+            text: '¿Est&aacute; seguro que desea eliminar el soplo <b>' + murmurname + '</b>?',
             html: true,
             type: 'warning',
             showLoaderOnConfirm: true,
@@ -137,7 +137,7 @@ app.controller("ctrlMurmurs", ["$scope", "$http", "SweetAlert", function ($s, $h
                         $SweetAlert.swal(body.name, body.message, "error");
                     } else {
                         $SweetAlert.swal({
-                            title: 'Usuario eliminado satisfactoriamente',
+                            title: 'Soplo eliminado satisfactoriamente',
                             text: body.message,
                             type: 'success'
                         }, function () {
