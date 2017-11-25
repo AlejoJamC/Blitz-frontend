@@ -62,63 +62,63 @@
                                 <label for="txtFirstName">
                                     Nombre*
                                 </label>
-                                <input type="text" value="{[{slMurmur.name}]}" class="form-control" name="txtFirstName" id="txtFirstName"  ng-model="frmMurmur.firstName" />
+                                <input type="text" class="form-control" name="txtname" id="txtname"  ng-model="frmMurmur.name" />
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="txtLastName">
                                     Titulo*
                                 </label>
-                                <input type="text" value="{[{slMurmur.title}]}" class="form-control" name="txtLastName" id="txtLastName" ng-model="frmMurmur.lastName" />
+                                <input type="text"  class="form-control" name="txttitle" id="txttitle" ng-model="frmMurmur.title" />
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="txtLastName">
                                     Despcripcion*
                                 </label>
-                                <input type="text" value="{[{slMurmur.description}]}" class="form-control" name="txtLastName" id="txtLastName" ng-model="frmMurmur.lastName" />
+                                <input type="text"  class="form-control" name="txtdescription" id="txtdescription" ng-model="frmMurmur.description" />
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="txtLastName">
                                     URL*
                                 </label>
-                                <input type="text" value="{[{slMurmur.url}]}" class="form-control" name="txtLastName" id="txtLastName" ng-model="frmMurmur.lastName" />
+                                <input type="text"  class="form-control" name="txturl" id="txturl" ng-model="frmMurmur.url" />
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="txtLastName">
                                     Audio*
                                 </label>
-                                <input type="text" value="{[{slMurmur.audio}]}" class="form-control" name="txtLastName" id="txtLastName" ng-model="frmMurmur.lastName" />
+                                <input type="text" class="form-control" name="txtaudio" id="txtaudio" ng-model="frmMurmur.audio" />
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="txtLastName">
                                     Imagen*
                                 </label>
-                                <input type="text" value="{[{slMurmur.image}]}" class="form-control" name="txtLastName" id="txtLastName" ng-model="frmMurmur.lastName" />
+                                <input type="text"  class="form-control" name="txtimage" id="txtimage" ng-model="frmMurmur.image" />
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="txtLastName">
                                     Figura*
                                 </label>
-                                <input type="text" value="{[{slMurmur.figure}]}" class="form-control" name="txtLastName" id="txtLastName" ng-model="frmMurmur.lastName" />
+                                <input type="text"  class="form-control" name="txtfigure" id="txtfigure" ng-model="frmMurmur.figure" />
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="txtLastName">
                                     FFT*
                                 </label>
-                                <input type="text" value="{[{slMurmur.fft}]}" class="form-control" name="txtLastName" id="txtLastName" ng-model="frmMurmur.lastName" />
+                                <input type="text" class="form-control" name="txtfft" id="txtfft" ng-model="frmMurmur.fft" />
                             </fieldset>
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" value="{[{slMurmur.status}]}" id="chkStatus" ng-model="frmMurmur.status"/>
+                                    <input type="checkbox"  id="chkStatus" ng-model="frmMurmur.status"/>
                                     Estado
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" value="{[{slMurmur.published}]}" id="chkPublished" ng-model="frmMurmur.status"/>
+                                    <input type="checkbox"  id="chkPublished" ng-model="frmMurmur.status"/>
                                     publicado
                                 </label>
                             </div>
-                            <button type="submit" class="btn btn-primary" ng-disabled="!frm_Murmur.$dirty||frm_Murmur.$invalid">
+                            <button type="submit" class="btn btn-primary" ng-disabled="true">
                                 {[{update?'Actualizar Datos':'Guardar'}]}
                             </button>
                         </form>

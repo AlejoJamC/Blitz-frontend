@@ -199,11 +199,13 @@ contentRouter.get('/content/murmur/:id', function (req, res, next) {
             }
         }
 
+        var bodyjson = JSON.parse(body);
+
         res.render('content/detail', {
-            title: 'Detalle de ',
+            title: 'Detalle del soplo',
             level: '../../',
             layout: 'content',
-            murmur: JSON.parse(body),
+            murmur: bodyjson,
             error: error
         });
     });
